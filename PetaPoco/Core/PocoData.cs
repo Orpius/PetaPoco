@@ -1,3 +1,4 @@
+//#if USE_REFLECTION_EMIT
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +13,7 @@ namespace PetaPoco.Core
     /// <summary>
     /// Represents the core data structure for PetaPoco's database operations.
     /// </summary>
-    public class PocoData
+    public partial class PocoData
     {
         private static readonly object _converterLock = new object();
 
@@ -23,7 +24,9 @@ namespace PetaPoco.Core
         private static FieldInfo fldConverters = typeof(PocoData).GetField("_converters", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic);
         private static MethodInfo fnListGetItem = typeof(List<Func<object, object>>).GetProperty("Item").GetGetMethod();
         private static MethodInfo fnInvoke = typeof(Func<object, object>).GetMethod("Invoke");
+        #if USE_REFLECTION_EMIT
         private Cache<Tuple<string, string, int, int>, Delegate> PocoFactories = new Cache<Tuple<string, string, int, int>, Delegate>();
+        #endif
 
         /// <summary>
         /// Gets or sets the type of the POCO class represented by the PocoData instance.
@@ -163,6 +166,7 @@ namespace PetaPoco.Core
             return ForType(t, defaultMapper);
         }
 
+        #if USE_REFLECTION_EMIT
         /// <summary>
         /// Creates a factory function to generate and cache a POCO from a data reader record at runtime. Subsequent reads attempt to locate
         /// the object in the <see cref="Cache{TKey, TValue}"/> for performance gains.
@@ -374,6 +378,7 @@ namespace PetaPoco.Core
                 return m.CreateDelegate(Expression.GetFuncType(typeof(IDataReader), Type));
             });
         }
+        #endif
 
         private static void AddConverterToStack(ILGenerator il, Func<object, object> converter)
         {
@@ -495,3 +500,4 @@ namespace PetaPoco.Core
             => Columns.Values.First(c => c.PropertyInfo.Name.Equals(propertyName)).ColumnName;
     }
 }
+//#endif

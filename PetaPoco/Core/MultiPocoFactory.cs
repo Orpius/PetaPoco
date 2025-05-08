@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if USE_REFLECTION_EMIT
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,7 +9,7 @@ using PetaPoco.Core;
 
 namespace PetaPoco.Internal
 {
-    internal class MultiPocoFactory
+    internal partial class MultiPocoFactory
     {
         // Various cached stuff
         private static readonly Cache<Tuple<Type, ArrayKey<Type>, string, string, int>, object> MultiPocoFactories
@@ -157,3 +158,4 @@ namespace PetaPoco.Internal
         }
     }
 }
+#endif
