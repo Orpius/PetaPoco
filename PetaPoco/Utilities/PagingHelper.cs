@@ -7,6 +7,10 @@ namespace PetaPoco.Utilities
     /// </summary>
     public class PagingHelper : IPagingHelper
     {
+        private static readonly Regex regexColumns = new Regex(
+            @"\A\s*SELECT\s+((?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|.)*?)(?<!,\s+)\bFROM\b",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
+
         /// <summary>
         /// Gets the regular expression used for matching the <c>SELECT</c> clause.
         /// </summary>
@@ -17,9 +21,11 @@ namespace PetaPoco.Utilities
         /// <c><u>SELECT column1, column2</u> FROM tbl;</c><br/>
         /// <c><u>SELECT SUM(column1) AS sum_col1, column2</u> FROM tbl;</c>
         /// </remarks>
-        public Regex RegexColumns { get; } = new Regex(
-            @"\A\s*SELECT\s+((?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|.)*?)(?<!,\s+)\bFROM\b",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
+        public Regex RegexColumns => regexColumns;
+
+
+        private static readonly Regex regexDistinct 
+            = new Regex(@"\ADISTINCT\s", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
 
         /// <summary>
         /// Gets the regular expression used for matching the <c>DISTINCT</c> keyword.
@@ -30,8 +36,11 @@ namespace PetaPoco.Utilities
         /// <c>SELECT <u>DISTINCT</u> * FROM tbl;</c><br/>
         /// <c>SELECT <u>DISTINCT</u> column1 FROM tbl;</c>
         /// </remarks>
-        public Regex RegexDistinct { get; } = new Regex(@"\ADISTINCT\s",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
+        public Regex RegexDistinct => regexDistinct;
+        
+        private static readonly Regex regexOrderBy
+            = new Regex(@"\bORDER\s+BY\s+(?!.*?(?:\)|\s+)AS\s)(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+(?:\s+(?:ASC|DESC))?(?:\s*,\s*(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+(?:\s+(?:ASC|DESC))?)*",
+                        RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
 
         /// <summary>
         /// Gets the regular expression used for matching the <c>ORDER BY</c> clause.
@@ -43,21 +52,26 @@ namespace PetaPoco.Utilities
         /// <c>SELECT * FROM tbl <u>ORDER BY column1, column2 DESC;</u></c><br/>
         /// <c>SELECT column1, column2 AS col2 <u>ORDER BY SUM(column1) ASC, col2;</u></c><br/>
         /// </remarks>
-        public Regex RegexOrderBy { get; } = new Regex(
-            @"\bORDER\s+BY\s+(?!.*?(?:\)|\s+)AS\s)(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+(?:\s+(?:ASC|DESC))?(?:\s*,\s*(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+(?:\s+(?:ASC|DESC))?)*",
-            RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
+        public Regex RegexOrderBy => regexOrderBy;
 
-        /// <summary>
-        /// Gets the regular expression used for matching the <c>ORDER BY</c> keyword.
-        /// </summary>
-        /// <remarks>
-        /// <para>This expression performs a simple match for the <c>ORDER BY</c> keyword in a SQL statement, followed by a space.
-        /// Everything after is excluded.</para>
-        /// <c>SELECT * FROM tbl <u>ORDER BY</u> column1, column2 DESC;</c><br/>
-        /// <c>SELECT column1, column2 AS col2 <u>ORDER BY</u> SUM(column1) ASC, col2;</c>
-        /// </remarks>
-        public Regex SimpleRegexOrderBy { get; } = new Regex(@"\bORDER\s+BY\s+",
-            RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
+
+        private static readonly Regex simpleRegexOrderBy 
+            = new Regex(@"\bORDER\s+BY\s+", 
+                        RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
+    /// <summary>
+    /// Gets the regular expression used for matching the <c>ORDER BY</c> keyword.
+    /// </summary>
+    /// <remarks>
+    /// <para>This expression performs a simple match for the <c>ORDER BY</c> keyword in a SQL statement, followed by a space.
+    /// Everything after is excluded.</para>
+    /// <c>SELECT * FROM tbl <u>ORDER BY</u> column1, column2 DESC;</c><br/>
+    /// <c>SELECT column1, column2 AS col2 <u>ORDER BY</u> SUM(column1) ASC, col2;</c>
+    /// </remarks>
+    public Regex SimpleRegexOrderBy => simpleRegexOrderBy;
+
+    private static readonly Regex regexGroupBy = new Regex(
+        @"\bGROUP\s+BY\s+(?!.*?(?:\)|\s+)AS\s)(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+?(?:\s*,\s*(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+?)*",
+        RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
 
         /// <summary>
         /// Gets the regular expression used for matching the <c>GROUP BY</c> clause.
@@ -69,10 +83,12 @@ namespace PetaPoco.Utilities
         /// <c>SELECT column1, column2 <u>GROUP BY SUM(column1), column2</u>;</c><br/>
         /// <c>SELECT column1 AS col1 FROM tbl <u>GROUP BY col1</u> ORDER BY col1;</c>
         /// </remarks>
-        public Regex RegexGroupBy { get; } = new Regex(
-            @"\bGROUP\s+BY\s+(?!.*?(?:\)|\s+)AS\s)(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+?(?:\s*,\s*(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+?)*",
-            RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
+        public Regex RegexGroupBy => regexGroupBy;
 
+        private static readonly Regex simpleRegexGroupBy 
+            = new Regex(@"\bGROUP\s+BY\s+",
+                        RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
+        
         /// <summary>
         /// Gets the regular expression used for matching the <c>GROUP BY</c> keyword.
         /// </summary>
@@ -82,8 +98,7 @@ namespace PetaPoco.Utilities
         /// <c>SELECT * FROM tbl <u>GROUP BY</u> column1, column2;</c><br/>
         /// <c>SELECT column1, COUNT(column2) AS count_col2 FROM tbl <u>GROUP BY</u> column1 ORDER BY column1;</c>
         /// </remarks>
-        public Regex SimpleRegexGroupBy { get; } = new Regex(@"\bGROUP\s+BY\s+",
-            RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
+        public Regex SimpleRegexGroupBy => simpleRegexGroupBy;
 
         /// <summary>
         /// Gets the singleton instance of the <see cref="PagingHelper"/> class.

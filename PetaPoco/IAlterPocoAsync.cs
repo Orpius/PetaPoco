@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -91,10 +92,10 @@ namespace PetaPoco
         Task<int> UpdateAsync(string tableName, string primaryKeyName, object poco, object primaryKeyValue, IEnumerable<string> columns);
 
         /// <inheritdoc cref="UpdateAsync{T}(CancellationToken, Sql)"/>
-        Task<int> UpdateAsync<T>(Sql sql);
+        Task<int> UpdateAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <inheritdoc cref="UpdateAsync{T}(CancellationToken, string, object[])"/>
-        Task<int> UpdateAsync<T>(string sql, params object[] args);
+        Task<int> UpdateAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously updates a record and returns the number of rows affected by the update operation.
@@ -165,7 +166,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains the number of rows affected by the update operation.
         /// </returns>
-        Task<int> UpdateAsync<T>(CancellationToken cancellationToken, Sql sql);
+        Task<int> UpdateAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously executes an SQL update and returns the number of rows affected by the update operation.
@@ -178,7 +179,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains the number of rows affected by the update operation.
         /// </returns>
-        Task<int> UpdateAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<int> UpdateAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
 
@@ -194,13 +195,13 @@ namespace PetaPoco
         Task<int> DeleteAsync(string tableName, string primaryKeyName, object poco, object primaryKeyValue);
 
         /// <inheritdoc cref="DeleteAsync{T}(CancellationToken, object)"/>
-        Task<int> DeleteAsync<T>(object pocoOrPrimaryKeyValue);
+        Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object pocoOrPrimaryKeyValue);
 
         /// <inheritdoc cref="DeleteAsync{T}(CancellationToken, Sql)"/>
-        Task<int> DeleteAsync<T>(Sql sql);
+        Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <inheritdoc cref="DeleteAsync{T}(CancellationToken, string, object[])"/>
-        Task<int> DeleteAsync<T>(string sql, params object[] args);
+        Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously deletes a record and returns the number of rows affected by the update operation.
@@ -249,7 +250,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains the number of rows affected by the delete operation.
         /// </returns>
-        Task<int> DeleteAsync<T>(CancellationToken cancellationToken, object pocoOrPrimaryKeyValue);
+        Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, object pocoOrPrimaryKeyValue);
 
         /// <summary>
         /// Asynchronously executes an SQL delete and returns the number of rows affected by the delete operation.
@@ -261,7 +262,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains the number of rows affected by the delete operation.
         /// </returns>
-        Task<int> DeleteAsync<T>(CancellationToken cancellationToken, Sql sql);
+        Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously executes an SQL delete and returns the number of rows affected by the delete operation.
@@ -274,7 +275,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains the number of rows affected by the delete operation.
         /// </returns>
-        Task<int> DeleteAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
 

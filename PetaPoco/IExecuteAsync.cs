@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,10 +17,10 @@ namespace PetaPoco
         Task<int> ExecuteAsync(string sql, params object[] args);
 
         /// <inheritdoc cref="ExecuteScalarAsync(CancellationToken, Sql)"/>
-        Task<T> ExecuteScalarAsync<T>(Sql sql);
+        Task<T> ExecuteScalarAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <inheritdoc cref="ExecuteScalarAsync(CancellationToken, string, object[])"/>
-        Task<T> ExecuteScalarAsync<T>(string sql, params object[] args);
+        Task<T> ExecuteScalarAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes a non-query command and returns the number of rows affected by the operation.
@@ -51,7 +52,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result is the scalar result value of type <typeparamref name="T"/>.
         /// </returns>
-        Task<T> ExecuteScalarAsync<T>(CancellationToken cancellationToken, Sql sql);
+        Task<T> ExecuteScalarAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a scalar command and returns the first column of the first row in the result set.
@@ -63,7 +64,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result is the scalar result value of type <typeparamref name="T"/>.
         /// </returns>
-        Task<T> ExecuteScalarAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<T> ExecuteScalarAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
     }
 #endif
 }

@@ -1,6 +1,8 @@
-﻿namespace PetaPoco.Internal
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace PetaPoco.Internal
 {
-    internal class ArrayKey<T>
+    internal class ArrayKey<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>
     {
         private int _hashCode;
 

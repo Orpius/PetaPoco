@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace PetaPoco.Utilities
@@ -10,7 +11,7 @@ namespace PetaPoco.Utilities
     /// Represents an asynchronous reader that reads a sequence of rows from a data source.
     /// </summary>
     /// <typeparam name="T">The POCO type representing a single result record.</typeparam>
-    public class AsyncReader<T> : IAsyncReader<T>
+    public class AsyncReader<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T> : IAsyncReader<T>
     {
         private readonly bool _isAsync;
         private readonly Func<IDataReader, T> _pocoFactory;

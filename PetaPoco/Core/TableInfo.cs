@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
@@ -34,7 +35,7 @@ namespace PetaPoco
         /// </summary>
         /// <param name="pocoType">The POCO type representing a single result record in the associated database table.</param>
         /// <returns>The TableInfo instance.</returns>
-        public static TableInfo FromPoco(Type pocoType)
+        public static TableInfo FromPoco([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type pocoType)
         {
             var ti = new TableInfo();
             PopulateTableNameFromPoco(pocoType, ref ti, out _);
@@ -42,14 +43,23 @@ namespace PetaPoco
             return ti;
         }
 
-        internal static void PopulateTableNameFromPoco(Type t, ref TableInfo ti, out TableNameAttribute tblAttr)
+        [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(TableNameAttribute))]
+        internal static void PopulateTableNameFromPoco(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type t, 
+            ref TableInfo ti, 
+            out TableNameAttribute tblAttr)
         {
             ti = ti ?? new TableInfo();
             tblAttr = t.GetCustomAttributes(typeof(TableNameAttribute), true).FirstOrDefault() as TableNameAttribute;
             ti.TableName = tblAttr?.Value ?? t.Name;
         }
 
-        internal static void PopulatePrimaryKeyFromPoco(Type t, ref TableInfo ti, out PrimaryKeyAttribute pkAttr, out PropertyInfo idProp)
+        [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(PrimaryKeyAttribute))]
+        internal static void PopulatePrimaryKeyFromPoco(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type t, 
+            ref TableInfo ti, 
+            out PrimaryKeyAttribute pkAttr, 
+            out PropertyInfo idProp)
         {
             ti = ti ?? new TableInfo();
             pkAttr = t.GetCustomAttributes(typeof(PrimaryKeyAttribute), true).FirstOrDefault() as PrimaryKeyAttribute;

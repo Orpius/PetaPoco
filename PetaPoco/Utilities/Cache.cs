@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PetaPoco.Internal
 {
-    internal class Cache<TKey, TValue>
+    internal class Cache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TKey,
+                         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
     {
         private readonly ConcurrentDictionary<TKey, Lazy<TValue>> _map = new ConcurrentDictionary<TKey, Lazy<TValue>>();
 

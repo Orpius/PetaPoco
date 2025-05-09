@@ -15,7 +15,12 @@ namespace PetaPoco.Core
             = new Cache<Tuple<string, string, int, int>, Delegate>();
 
         /// <inheritdoc />
-        public Delegate GetFactory(string sql, string connectionString, int firstColumn, int columnCount, IDataReader reader, IMapper defaultMapper)
+        public Delegate GetFactory(string sql, 
+                                   string connectionString, 
+                                   int firstColumn, 
+                                   int columnCount, 
+                                   IDataReader reader, 
+                                   IMapper defaultMapper)
         {
             var key = Tuple.Create(sql, connectionString, firstColumn, columnCount);
             return PocoFactories.GetOrAdd(key, () => BuildFactoryDelegate(reader, defaultMapper, firstColumn, columnCount));

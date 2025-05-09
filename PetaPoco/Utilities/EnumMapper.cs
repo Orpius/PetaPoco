@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PetaPoco.Internal
 {
@@ -7,7 +8,7 @@ namespace PetaPoco.Internal
     {
         private static Cache<Type, Dictionary<string, object>> _types = new Cache<Type, Dictionary<string, object>>();
 
-        public static object EnumFromString(Type enumType, string value)
+        public static object EnumFromString([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type enumType, string value)
         {
             Dictionary<string, object> map = _types.GetOrAdd(enumType, () =>
             {

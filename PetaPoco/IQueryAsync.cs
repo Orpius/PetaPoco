@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,13 +17,14 @@ namespace PetaPoco
         #region QueryAsync : Single-POCO
 
         /// <inheritdoc cref="QueryAsync{T}(CancellationToken)"/>
-        Task<IAsyncReader<T>> QueryAsync<T>();
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>();
 
         /// <inheritdoc cref="QueryAsync{T}(CancellationToken, Sql)"/>
-        Task<IAsyncReader<T>> QueryAsync<T>(Sql sql);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <inheritdoc cref="QueryAsync{T}(CancellationToken, string, object[])"/>
-        Task<IAsyncReader<T>> QueryAsync<T>(string sql, params object[] args);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes an auto-select query (<c>SELECT *</c>) and returns an async reader.
@@ -36,7 +38,8 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an <see cref="IAsyncReader{T}"/> for reading the
         /// result set.
         /// </returns>
-        Task<IAsyncReader<T>> QueryAsync<T>(CancellationToken cancellationToken);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            CancellationToken cancellationToken);
 
         /// <summary>
         /// Asynchronously executes a query and returns an async reader.
@@ -48,7 +51,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an <see cref="IAsyncReader{T}"/> for reading the
         /// result set.
         /// </returns>
-        Task<IAsyncReader<T>> QueryAsync<T>(CancellationToken cancellationToken, Sql sql);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a query and returns an async reader.
@@ -65,20 +68,20 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an <see cref="IAsyncReader{T}"/> for reading the
         /// result set.
         /// </returns>
-        Task<IAsyncReader<T>> QueryAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
 
         #region QueryAsync : Single-POCO as CommandType
 
         /// <inheritdoc cref="QueryAsync{T}(CancellationToken, CommandType)"/>
-        Task<IAsyncReader<T>> QueryAsync<T>(CommandType commandType);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType);
 
         /// <inheritdoc cref="QueryAsync{T}(CancellationToken, CommandType, Sql)"/>
-        Task<IAsyncReader<T>> QueryAsync<T>(CommandType commandType, Sql sql);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType, Sql sql);
 
         /// <inheritdoc cref="QueryAsync{T}(CancellationToken, CommandType, string, object[])"/>
-        Task<IAsyncReader<T>> QueryAsync<T>(CommandType commandType, string sql, params object[] args);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType, string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes an auto-select query (<c>SELECT *</c>) for the specified command type and returns an async reader.
@@ -93,7 +96,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an <see cref="IAsyncReader{T}"/> for reading the
         /// result set.
         /// </returns>
-        Task<IAsyncReader<T>> QueryAsync<T>(CancellationToken cancellationToken, CommandType commandType);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType);
 
         /// <summary>
         /// Asynchronously executes a query for the specified command type and returns an async reader.
@@ -106,7 +109,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an <see cref="IAsyncReader{T}"/> for reading the
         /// result set.
         /// </returns>
-        Task<IAsyncReader<T>> QueryAsync<T>(CancellationToken cancellationToken, CommandType commandType, Sql sql);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a query for the specified command type and returns an async reader.
@@ -120,20 +123,20 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an <see cref="IAsyncReader{T}"/> for reading the
         /// result set.
         /// </returns>
-        Task<IAsyncReader<T>> QueryAsync<T>(CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args);
+        Task<IAsyncReader<T>> QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args);
 
         #endregion
 
         #region QueryAsync with Action : Single-POCO
 
         /// <inheritdoc cref="QueryAsync{T}(Action{T}, CancellationToken)"/>
-        Task QueryAsync<T>(Action<T> action);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action);
 
         /// <inheritdoc cref="QueryAsync{T}(Action{T}, CancellationToken, Sql)"/>
-        Task QueryAsync<T>(Action<T> action, Sql sql);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, Sql sql);
 
         /// <inheritdoc cref="QueryAsync{T}(Action{T}, CancellationToken, string, object[])"/>
-        Task QueryAsync<T>(Action<T> action, string sql, params object[] args);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes an auto-select query (<c>SELECT *</c>) and invokes the specified action on each result read from the
@@ -148,13 +151,13 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken);
 
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
         /// <param name="action">An action to perform on each POCO in the result set.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="QueryAsync{T}(Action{T}, CancellationToken, CommandType, string, object[])"/>
-        Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, Sql sql);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a query and invokes the specified action on each result read from the underlying data reader.
@@ -167,20 +170,20 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, string sql, params object[] args);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
 
         #region QueryAsync with Action : Single-POCO as CommandType
 
         /// <inheritdoc cref="QueryAsync{T}(Action{T}, CancellationToken, CommandType)"/>
-        Task QueryAsync<T>(Action<T> action, CommandType commandType);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CommandType commandType);
 
         /// <inheritdoc cref="QueryAsync{T}(Action{T}, CancellationToken, CommandType, Sql)"/>
-        Task QueryAsync<T>(Action<T> action, CommandType commandType, Sql sql);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CommandType commandType, Sql sql);
 
         /// <inheritdoc cref="QueryAsync{T}(Action{T}, CancellationToken, CommandType, string, object[])"/>
-        Task QueryAsync<T>(Action<T> action, CommandType commandType, string sql, params object[] args);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CommandType commandType, string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes an auto-select query (<c>SELECT *</c>) for the specified command type and invokes the specified action
@@ -196,14 +199,14 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType);
 
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
         /// <param name="action">An action to perform on each POCO in the result set.</param>
         /// <param name="commandType">The type of command to execute.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="QueryAsync{T}(Action{T}, CancellationToken, CommandType, string, object[])"/>
-        Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, Sql sql);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a query for the specified command type and invokes the specified action on each result read from the
@@ -218,7 +221,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args);
+        Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args);
 
         #endregion
 
@@ -237,13 +240,13 @@ namespace PetaPoco
         #region FetchAsync : Single-POCO
 
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken)"/>
-        Task<List<T>> FetchAsync<T>();
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>();
 
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, Sql)"/>
-        Task<List<T>> FetchAsync<T>(Sql sql);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, string, object[])"/>
-        Task<List<T>> FetchAsync<T>(string sql, params object[] args);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes an auto-select query (<c>SELECT *</c>) and returns the results as a list of type <typeparamref
@@ -257,12 +260,12 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
-        Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken);
 
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, string, object[])"/>
-        Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, Sql sql);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a query and returns the results as a list of type <typeparamref name="T"/>.
@@ -274,20 +277,20 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
-        Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
 
         #region FetchAsync : Single-POCO as CommandType
 
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, CommandType)"/>
-        Task<List<T>> FetchAsync<T>(CommandType commandType);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType);
 
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, CommandType, Sql)"/>
-        Task<List<T>> FetchAsync<T>(CommandType commandType, Sql sql);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType, Sql sql);
 
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, CommandType, string, object[])"/>
-        Task<List<T>> FetchAsync<T>(CommandType commandType, string sql, params object[] args);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType, string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes an auto-select query (<c>SELECT *</c>) for the specified command type and returns the results as a list
@@ -302,13 +305,13 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
-        Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, CommandType commandType);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType);
 
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
         /// <param name="commandType">The type of command to execute.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, CommandType, string, object[])"/>
-        Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, CommandType commandType, Sql sql);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a query for the specified command type and returns the results as a list of type <typeparamref
@@ -322,7 +325,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
-        Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args);
 
         #endregion
 
@@ -335,13 +338,13 @@ namespace PetaPoco
         #region FetchAsync : Paged SkipTake
 
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, long, long)"/>
-        Task<List<T>> FetchAsync<T>(long page, long maxItemsPerPage);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage);
 
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, long, long, Sql)"/>
-        Task<List<T>> FetchAsync<T>(long page, long maxItemsPerPage, Sql sql);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql sql);
 
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, long, long, string, object[])"/>
-        Task<List<T>> FetchAsync<T>(long page, long maxItemsPerPage, string sql, params object[] args);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes an auto-select query (<c>SELECT *</c>) for a subset of records based on the specified parameters, and
@@ -360,7 +363,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
-        Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage);
 
         /// <remarks>
         /// This method performs essentially the same operation as <see cref="SkipTakeAsync{T}(CancellationToken, long, long, Sql)"/>.
@@ -372,7 +375,7 @@ namespace PetaPoco
         /// <param name="maxItemsPerPage">The maximum number of records per page.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="FetchAsync{T}(CancellationToken, long, long, string, object[])"/>
-        Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql sql);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a query for a subset of records based on the specified parameters, and returns the results as a list of
@@ -392,26 +395,26 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
-        Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string sql, params object[] args);
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string sql, params object[] args);
 
         #endregion
 
         #region PageAsync
 
         /// <inheritdoc cref="PageAsync{T}(CancellationToken, long, long)"/>
-        Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage);
 
         /// <inheritdoc cref="PageAsync{T}(CancellationToken, long, long, Sql)"/>
-        Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage, Sql sql);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql sql);
 
         /// <inheritdoc cref="PageAsync{T}(CancellationToken, long, long, string, object[])"/>
-        Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage, string sql, params object[] args);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string sql, params object[] args);
 
         /// <inheritdoc cref="PageAsync{T}(CancellationToken, long, long, Sql, Sql)"/>
-        Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage, Sql countSql, Sql pageSql);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql countSql, Sql pageSql);
 
         /// <inheritdoc cref="PageAsync{T}(CancellationToken, long, long, string, object[], string, object[])"/>
-        Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs);
 
         /// <summary>
         /// Asynchronously executes an auto-select query (<c>SELECT *</c>) for a subset of records based on the specified parameters, and
@@ -428,7 +431,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an initialized <see cref="Page{T}"/> containing a
         /// list of POCOs.
         /// </returns>
-        Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage);
 
         /// <summary>
         /// Asynchronously executes a query for a subset of records based on the specified parameters, and returns the results as a Page of
@@ -443,7 +446,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an initialized <see cref="Page{T}"/> containing a
         /// list of POCOs.
         /// </returns>
-        Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql sql);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a query for a subset of records based on the specified parameters, and returns the results as a Page of
@@ -459,7 +462,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an initialized <see cref="Page{T}"/> containing a
         /// list of POCOs.
         /// </returns>
-        Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string sql, params object[] args);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes a query for a subset of records based on the specified parameters, and returns the results as a Page of
@@ -477,7 +480,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an initialized <see cref="Page{T}"/> containing a
         /// list of POCOs.
         /// </returns>
-        Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql countSql, Sql pageSql);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql countSql, Sql pageSql);
 
         /// <summary>
         /// Asynchronously executes a query for a subset of records based on the specified parameters, and returns the results as a Page of
@@ -495,20 +498,20 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an initialized <see cref="Page{T}"/> containing a
         /// list of POCOs.
         /// </returns>
-        Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs);
+        Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs);
 
         #endregion
 
         #region SkipTakeAsync
 
         /// <inheritdoc cref="SkipTakeAsync{T}(CancellationToken, long, long)"/>
-        Task<List<T>> SkipTakeAsync<T>(long skip, long take);
+        Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take);
 
         /// <inheritdoc cref="SkipTakeAsync{T}(CancellationToken, long, long, Sql)"/>
-        Task<List<T>> SkipTakeAsync<T>(long skip, long take, Sql sql);
+        Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take, Sql sql);
 
         /// <inheritdoc cref="SkipTakeAsync{T}(CancellationToken, long, long, string, object[])"/>
-        Task<List<T>> SkipTakeAsync<T>(long skip, long take, string sql, params object[] args);
+        Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take, string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously executes an auto-select query (<c>SELECT *</c>) for a subset of records based on the specified parameters, and
@@ -524,14 +527,14 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
-        Task<List<T>> SkipTakeAsync<T>(CancellationToken cancellationToken, long skip, long take);
+        Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long skip, long take);
 
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
         /// <param name="skip">The number of records to skip.</param>
         /// <param name="take">The number of records to take.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="SkipTakeAsync{T}(CancellationToken, long, long, string, object[])"/>
-        Task<List<T>> SkipTakeAsync<T>(CancellationToken cancellationToken, long skip, long take, Sql sql);
+        Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long skip, long take, Sql sql);
 
         /// <summary>
         /// Asynchronously executes a query for a subset of records based on the specified parameters, and returns the results as a list of
@@ -546,19 +549,19 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
-        Task<List<T>> SkipTakeAsync<T>(CancellationToken cancellationToken, long skip, long take, string sql, params object[] args);
+        Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long skip, long take, string sql, params object[] args);
 
         #endregion
 
         #region ExistsAsync
 
         /// <inheritdoc cref="ExistsAsync{T}(CancellationToken, object)"/>
-        Task<bool> ExistsAsync<T>(object pocoOrPrimaryKeyValue);
+        Task<bool> ExistsAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object pocoOrPrimaryKeyValue);
 
         // TODO: Missing overload: `IQueryAsync.ExistsAsync<T>(Sql)`
 
         /// <inheritdoc cref="ExistsAsync{T}(CancellationToken, string, object[])"/>
-        Task<bool> ExistsAsync<T>(string sql, params object[] args);
+        Task<bool> ExistsAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously determines whether a record exists with the specified primary key value.
@@ -574,7 +577,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains <see langword="true"/> if one or more records exist
         /// with the specified primary key value; otherwise, <see langword="false"/>.
         /// </returns>
-        Task<bool> ExistsAsync<T>(CancellationToken cancellationToken, object pocoOrPrimaryKeyValue);
+        Task<bool> ExistsAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, object pocoOrPrimaryKeyValue);
 
         // TODO: Missing overload: `IQueryAsync.ExistsAsync<T>(CancellationToken, Sql)`
 
@@ -589,20 +592,20 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains <see langword="true"/> if one or more records exist
         /// that satisfy the conditions defined in the specified query; otherwise, <see langword="false"/>.
         /// </returns>
-        Task<bool> ExistsAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<bool> ExistsAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
 
         #region SingleAsync
 
         /// <inheritdoc cref="SingleAsync{T}(CancellationToken, object)"/>
-        Task<T> SingleAsync<T>(object primaryKey);
+        Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object primaryKey);
 
         /// <inheritdoc cref="SingleAsync{T}(CancellationToken, Sql)"/>
-        Task<T> SingleAsync<T>(Sql sql);
+        Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <inheritdoc cref="SingleAsync{T}(CancellationToken, string, object[])"/>
-        Task<T> SingleAsync<T>(string sql, params object[] args);
+        Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously returns the only record that matches the specified primary key value, and throws an exception if there is not
@@ -616,12 +619,12 @@ namespace PetaPoco
         /// </returns>
         /// <exception cref="InvalidOperationException">The result set is empty, or the result set contains more than one
         /// record.</exception>
-        Task<T> SingleAsync<T>(CancellationToken cancellationToken, object primaryKey);
+        Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, object primaryKey);
 
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="SingleAsync{T}(CancellationToken, string, object[])"/>
-        Task<T> SingleAsync<T>(CancellationToken cancellationToken, Sql sql);
+        Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously returns the only record that matches the specified query, and throws an exception if there is not exactly one
@@ -636,20 +639,20 @@ namespace PetaPoco
         /// </returns>
         /// <exception cref="InvalidOperationException">The result set is empty, or the result set contains more than one
         /// record.</exception>
-        Task<T> SingleAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
 
         #region SingleOrDefaultAsync
 
         /// <inheritdoc cref="SingleOrDefaultAsync{T}(CancellationToken, object)"/>
-        Task<T> SingleOrDefaultAsync<T>(object primaryKey);
+        Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object primaryKey);
 
         /// <inheritdoc cref="SingleOrDefaultAsync{T}(CancellationToken, Sql)"/>
-        Task<T> SingleOrDefaultAsync<T>(Sql sql);
+        Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <inheritdoc cref="SingleOrDefaultAsync{T}(CancellationToken, string, object[])"/>
-        Task<T> SingleOrDefaultAsync<T>(string sql, params object[] args);
+        Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         /// <summary>
         /// Asynchronously returns the only record that matches the specified primary key value, or a default value if the result set is
@@ -663,12 +666,12 @@ namespace PetaPoco
         /// single result returned by the specified query.
         /// </returns>
         /// <exception cref="InvalidOperationException">The result set contains more than one record.</exception>
-        Task<T> SingleOrDefaultAsync<T>(CancellationToken cancellationToken, object primaryKey);
+        Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, object primaryKey);
 
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="SingleOrDefaultAsync{T}(CancellationToken, string, object[])"/>
-        Task<T> SingleOrDefaultAsync<T>(CancellationToken cancellationToken, Sql sql);
+        Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously returns the only record that matches the specified query, or a default value if the result set is empty; this
@@ -683,22 +686,22 @@ namespace PetaPoco
         /// single result returned by the specified query.
         /// </returns>
         /// <exception cref="InvalidOperationException">The result set contains more than one record.</exception>
-        Task<T> SingleOrDefaultAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
 
         #region FirstAsync
 
         /// <inheritdoc cref="FirstAsync{T}(CancellationToken, Sql)"/>
-        Task<T> FirstAsync<T>(Sql sql);
+        Task<T> FirstAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <inheritdoc cref="FirstAsync{T}(CancellationToken, string, object[])"/>
-        Task<T> FirstAsync<T>(string sql, params object[] args);
+        Task<T> FirstAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
         /// <param name="sql">The SQL query string.</param>
         /// <inheritdoc cref="FirstAsync{T}(CancellationToken, string, object[])"/>
-        Task<T> FirstAsync<T>(CancellationToken cancellationToken, Sql sql);
+        Task<T> FirstAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously returns the first result returned by the specified query, and throws an exception if the result set is empty.
@@ -711,22 +714,22 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains the first result returned by the specified query.
         /// </returns>
         /// <exception cref="InvalidOperationException">The result set is empty.</exception>
-        Task<T> FirstAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<T> FirstAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
 
         #region FirstOrDefaultAsync
 
         /// <inheritdoc cref="FirstOrDefaultAsync{T}(CancellationToken, Sql)"/>
-        Task<T> FirstOrDefaultAsync<T>(Sql sql);
+        Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <inheritdoc cref="FirstOrDefaultAsync{T}(CancellationToken, string, object[])"/>
-        Task<T> FirstOrDefaultAsync<T>(string sql, params object[] args);
+        Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="FirstOrDefaultAsync{T}(CancellationToken, string, object[])"/>
-        Task<T> FirstOrDefaultAsync<T>(CancellationToken cancellationToken, Sql sql);
+        Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql);
 
         /// <summary>
         /// Asynchronously returns the first result returned by the specified query, or a default value if the result set is empty.
@@ -739,7 +742,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains default(T) if the result set is empty; otherwise,
         /// the first result returned by the specified query.
         /// </returns>
-        Task<T> FirstOrDefaultAsync<T>(CancellationToken cancellationToken, string sql, params object[] args);
+        Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
         #endregion
     }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -31,7 +32,7 @@ namespace PetaPoco.Core
         /// <summary>
         /// Gets or sets the type of the POCO class represented by the PocoData instance.
         /// </summary>
-        public Type Type { get; set; }
+        public Type Type { get; [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] set; }
 
         /// <summary>
         /// Gets the array of all queryable database column names used by auto-select for query operations when <see
@@ -77,7 +78,7 @@ namespace PetaPoco.Core
         /// </summary>
         /// <param name="type">The type of the POCO class.</param>
         /// <param name="defaultMapper">The default mapper to use for the POCO type.</param>
-        public PocoData(Type type, IMapper defaultMapper)
+        public PocoData([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type, IMapper defaultMapper)
         {
             Type = type;
 
@@ -123,7 +124,7 @@ namespace PetaPoco.Core
         /// <param name="defaultMapper">The default mapper to use for the type.</param>
         /// <returns>A new PocoData instance for the specified type.</returns>
         /// <exception cref="InvalidOperationException">Trying to use dynamic types with this method.</exception>
-        public static PocoData ForType(Type type, IMapper defaultMapper)
+        public static PocoData ForType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type, IMapper defaultMapper)
         {
             if (type == typeof(System.Dynamic.ExpandoObject))
                 throw new InvalidOperationException("Cannot use dynamic types with this method");
@@ -400,7 +401,11 @@ namespace PetaPoco.Core
             }
         }
 
-        private static Func<object, object> GetConverter(IMapper mapper, PocoColumn pc, Type srcType, Type dstType)
+        private static Func<object, object> GetConverter(
+            IMapper mapper, 
+            PocoColumn pc, 
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type srcType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type dstType)
         {
             Func<object, object> converter = null;
 
@@ -462,13 +467,15 @@ namespace PetaPoco.Core
             return null;
         }
 
-        private static bool IsIntegralType(Type type)
+        private static bool IsIntegralType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type)
         {
             var tc = Type.GetTypeCode(type);
             return tc >= TypeCode.SByte && tc <= TypeCode.UInt64;
         }
 
-        private static T RecurseInheritedTypes<T>(Type t, Func<Type, T> cb)
+        private static T RecurseInheritedTypes<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type t, 
+            Func<Type, T> cb)
         {
             while (t != null)
             {

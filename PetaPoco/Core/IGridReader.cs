@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PetaPoco
 {
@@ -15,17 +16,20 @@ namespace PetaPoco
         /// </summary>
         /// <typeparam name="T">The POCO type representing a single result record.</typeparam>
         /// <returns>An enumerable sequence of results of type <typeparamref name="T"/>.</returns>
-        IEnumerable<T> Read<T>();
+        IEnumerable<T> Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>();
 
         #endregion
 
         #region Read with Default Mapping : Multi-POCO
 
         /// <inheritdoc cref="Read{T1,T2,T3,T4}()"/>
-        IEnumerable<T1> Read<T1, T2>();
+        IEnumerable<T1> Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2>();
 
         /// <inheritdoc cref="Read{T1,T2,T3,T4}()"/>
-        IEnumerable<T1> Read<T1, T2, T3>();
+        IEnumerable<T1> Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3>();
 
         /// <summary>
         /// Reads a sequence of results from a data reader and projects them into a new form of type <typeparamref name="T1"/> using a
@@ -40,17 +44,27 @@ namespace PetaPoco
         /// <typeparam name="T3">The third POCO type.</typeparam>
         /// <typeparam name="T4">The fourth POCO type.</typeparam>
         /// <returns>An enumerable sequence of results of type <typeparamref name="T1"/>.</returns>
-        IEnumerable<T1> Read<T1, T2, T3, T4>();
+        IEnumerable<T1> Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4>();
 
         #endregion
 
         #region Read with Custom Mapping : Multi-POCO
 
         /// <inheritdoc cref="Read{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
-        IEnumerable<TResult> Read<T1, T2, TResult>(Func<T1, T2, TResult> projector);
+        IEnumerable<TResult> Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, TResult> projector);
 
         /// <inheritdoc cref="Read{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
-        IEnumerable<TResult> Read<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> projector);
+        IEnumerable<TResult> Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, TResult> projector);
 
         /// <summary>
         /// Reads a sequence of results from a data reader and projects them into a new form of type <typeparamref name="TResult"/> using
@@ -67,7 +81,12 @@ namespace PetaPoco
         /// <typeparam name="TResult">The projected POCO type representing a single result record.</typeparam>
         /// <param name="projector">A function that transforms each of the given types into a <typeparamref name="TResult"/>.</param>
         /// <returns>An enumerable sequence of results of type <typeparamref name="TResult"/>.</returns>
-        IEnumerable<TResult> Read<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> projector);
+        IEnumerable<TResult> Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, T4, TResult> projector);
 
         #endregion
     }

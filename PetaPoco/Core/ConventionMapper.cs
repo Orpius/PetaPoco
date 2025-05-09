@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using PetaPoco.Core.Inflection;
@@ -150,7 +151,7 @@ namespace PetaPoco
         }
 
         /// <inheritdoc/>
-        public virtual TableInfo GetTableInfo(Type pocoType)
+        public virtual TableInfo GetTableInfo([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type pocoType)
         {
             var ti = new TableInfo();
             return MapTable(ti, pocoType) ? ti : null;
@@ -164,7 +165,9 @@ namespace PetaPoco
         }
 
         /// <inheritdoc/>
-        public virtual Func<object, object> GetFromDbConverter(PropertyInfo targetProperty, Type sourceType)
+        public virtual Func<object, object> GetFromDbConverter(
+            PropertyInfo targetProperty, 
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type sourceType)
         {
             return FromDbConverter?.Invoke(targetProperty, sourceType);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PetaPoco
 {
@@ -20,11 +21,11 @@ namespace PetaPoco
         /// </remarks>
         /// <typeparam name="T">The POCO type representing a single result record.</typeparam>
         /// <returns>An enumerable sequence of POCOs of type <typeparamref name="T"/>.</returns>
-        IEnumerable<T> Query<T>();
+        IEnumerable<T> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>();
 
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="Query{T}(string, object[])"/>
-        IEnumerable<T> Query<T>(Sql sql);
+        IEnumerable<T> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <summary>
         /// Executes a query and returns the results as a sequence of type <typeparamref name="T"/>.
@@ -38,20 +39,26 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>An enumerable sequence of POCOs of type <typeparamref name="T"/>.</returns>
-        IEnumerable<T> Query<T>(string sql, params object[] args);
+        IEnumerable<T> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         #endregion
 
         #region Query with Default Mapping : Multi-POCO
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5}(Sql)"/>
-        IEnumerable<T1> Query<T1, T2>(Sql sql);
+        IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1, 
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2>(Sql sql);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5}(Sql)"/>
-        IEnumerable<T1> Query<T1, T2, T3>(Sql sql);
+        IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3>(Sql sql);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5}(Sql)"/>
-        IEnumerable<T1> Query<T1, T2, T3, T4>(Sql sql);
+        IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4>(Sql sql);
 
         /// <summary>
         /// Executes a multi-poco query and projects the result sequence into a new form of type <typeparamref name="T1"/> using a default
@@ -68,16 +75,26 @@ namespace PetaPoco
         /// <typeparam name="T5">The fifth POCO type.</typeparam>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <returns>An enumerable sequence of POCOs of type <typeparamref name="T1"/>.</returns>
-        IEnumerable<T1> Query<T1, T2, T3, T4, T5>(Sql sql);
+        IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5>(Sql sql);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5}(string, object[])"/>
-        IEnumerable<T1> Query<T1, T2>(string sql, params object[] args);
+        IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2>(string sql, params object[] args);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5}(string, object[])"/>
-        IEnumerable<T1> Query<T1, T2, T3>(string sql, params object[] args);
+        IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3>(string sql, params object[] args);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5}(string, object[])"/>
-        IEnumerable<T1> Query<T1, T2, T3, T4>(string sql, params object[] args);
+        IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4>(string sql, params object[] args);
 
         /// <summary>
         /// Executes a multi-poco query and projects the result sequence into a new form of type <typeparamref name="T1"/> using a default
@@ -95,20 +112,35 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>An enumerable sequence of POCOs of type <typeparamref name="T1"/>.</returns>
-        IEnumerable<T1> Query<T1, T2, T3, T4, T5>(string sql, params object[] args);
+        IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5>(string sql, params object[] args);
 
         #endregion
 
         #region Query with Custom Mapping : Multi-POCO
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, Sql)"/>
-        IEnumerable<TResult> Query<T1, T2, TResult>(Func<T1, T2, TResult> projector, Sql sql);
+        IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, TResult> projector, Sql sql);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, Sql)"/>
-        IEnumerable<TResult> Query<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> projector, Sql sql);
+        IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, TResult> projector, Sql sql);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, Sql)"/>
-        IEnumerable<TResult> Query<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> projector, Sql sql);
+        IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, T4, TResult> projector, Sql sql);
 
         /// <summary>
         /// Executes a multi-poco query and projects the result sequence into a new form of type <typeparamref name="TResult"/> using the
@@ -128,16 +160,34 @@ namespace PetaPoco
         /// langword="null"/> to use a default mapping function.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <returns>An enumerable sequence of POCOs of type <typeparamref name="TResult"/>.</returns>
-        IEnumerable<TResult> Query<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, Sql sql);
+        IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, T4, T5, TResult> projector, Sql sql);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, string, object[])"/>
-        IEnumerable<TResult> Query<T1, T2, TResult>(Func<T1, T2, TResult> projector, string sql, params object[] args);
+        IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, TResult> projector, string sql, params object[] args);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, string, object[])"/>
-        IEnumerable<TResult> Query<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> projector, string sql, params object[] args);
+        IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, TResult> projector, string sql, params object[] args);
 
         /// <inheritdoc cref="Query{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, string, object[])"/>
-        IEnumerable<TResult> Query<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> projector, string sql, params object[] args);
+        IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, T4, TResult> projector, string sql, params object[] args);
 
         /// <summary>
         /// Executes a multi-poco query and projects the result sequence into a new form of type <typeparamref name="TResult"/> using the
@@ -158,7 +208,13 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>An enumerable sequence of POCOs of type <typeparamref name="TResult"/>.</returns>
-        IEnumerable<TResult> Query<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, string sql, params object[] args);
+        IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, T4, T5, TResult> projector, string sql, params object[] args);
 
         /// <summary>
         /// Executes a multi-poco query and projects the result sequence into a new form of type <typeparamref name="TResult"/> using the
@@ -176,7 +232,11 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>An enumerable sequence of POCOs of type <typeparamref name="TResult"/>.</returns>
-        IEnumerable<TResult> Query<TResult>(Type[] types, object projector, string sql, params object[] args);
+        IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]  TResult>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type[] types, 
+            object projector, 
+            string sql, 
+            params object[] args);
 
         #endregion
 
@@ -206,11 +266,11 @@ namespace PetaPoco
         /// </remarks>
         /// <typeparam name="T">The POCO type representing a single result record.</typeparam>
         /// <returns>A list of POCOs of type <typeparamref name="T"/>.</returns>
-        List<T> Fetch<T>();
+        List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>();
 
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="Fetch{T}(string, object[])"/>
-        List<T> Fetch<T>(Sql sql);
+        List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <summary>
         /// Executes a query and returns the results as a list of type <typeparamref name="T"/>.
@@ -219,20 +279,26 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>A list of POCOs of type <typeparamref name="T"/>.</returns>
-        List<T> Fetch<T>(string sql, params object[] args);
+        List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         #endregion
 
         #region Fetch with Default Mapping : Multi-POCO
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5}(Sql)"/>
-        List<T1> Fetch<T1, T2>(Sql sql);
+        List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2>(Sql sql);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5}(Sql)"/>
-        List<T1> Fetch<T1, T2, T3>(Sql sql);
+        List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3>(Sql sql);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5}(Sql)"/>
-        List<T1> Fetch<T1, T2, T3, T4>(Sql sql);
+        List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4>(Sql sql);
 
         /// <summary>
         /// Executes a multi-poco query and projects the result sequence into a new form of type <typeparamref name="T1"/> using a default
@@ -249,16 +315,26 @@ namespace PetaPoco
         /// <typeparam name="T5">The fifth POCO type.</typeparam>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <returns>A list of POCOs of type <typeparamref name="T1"/>.</returns>
-        List<T1> Fetch<T1, T2, T3, T4, T5>(Sql sql);
+        List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5>(Sql sql);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5}(string, object[])"/>
-        List<T1> Fetch<T1, T2>(string sql, params object[] args);
+        List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2>(string sql, params object[] args);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5}(string, object[])"/>
-        List<T1> Fetch<T1, T2, T3>(string sql, params object[] args);
+        List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3>(string sql, params object[] args);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5}(string, object[])"/>
-        List<T1> Fetch<T1, T2, T3, T4>(string sql, params object[] args);
+        List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4>(string sql, params object[] args);
 
         /// <summary>
         /// Executes a multi-poco query and projects the result sequence into a new form of type <typeparamref name="T1"/> using a default
@@ -276,20 +352,36 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>A list of POCOs of type <typeparamref name="T1"/>.</returns>
-        List<T1> Fetch<T1, T2, T3, T4, T5>(string sql, params object[] args);
+        List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                       [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5>(string sql, params object[] args);
 
         #endregion
 
         #region Fetch with Custom Mapping : Multi-POCO
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, Sql)"/>
-        List<TResult> Fetch<T1, T2, TResult>(Func<T1, T2, TResult> projector, Sql sql);
+        List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, TResult> projector, Sql sql);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, Sql)"/>
-        List<TResult> Fetch<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> projector, Sql sql);
+        List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, TResult> projector, Sql sql);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, Sql)"/>
-        List<TResult> Fetch<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> projector, Sql sql);
+        List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, T4, TResult> projector, Sql sql);
 
         /// <summary>
         /// Executes a multi-poco query and projects the result sequence into a new form of type <typeparamref name="TResult"/> using the
@@ -309,16 +401,33 @@ namespace PetaPoco
         /// langword="null"/> to use a default mapping function.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <returns>A list of POCOs of type <typeparamref name="T1"/>.</returns>
-        List<TResult> Fetch<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, Sql sql);
+        List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, T4, T5, TResult> projector, Sql sql);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, string, object[])"/>
-        List<TResult> Fetch<T1, T2, TResult>(Func<T1, T2, TResult> projector, string sql, params object[] args);
+        List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, TResult> projector, string sql, params object[] args);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, string, object[])"/>
-        List<TResult> Fetch<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> projector, string sql, params object[] args);
+        List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, TResult> projector, string sql, params object[] args);
 
         /// <inheritdoc cref="Fetch{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult}, string, object[])"/>
-        List<TResult> Fetch<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> projector, string sql, params object[] args);
+        List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, T4, TResult> projector, string sql, params object[] args);
 
         /// <summary>
         /// Executes a multi-poco query and projects the result sequence into a new form of type <typeparamref name="TResult"/> using the
@@ -339,7 +448,13 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>A list of POCOs of type <typeparamref name="T1"/>.</returns>
-        List<TResult> Fetch<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, string sql, params object[] args);
+        List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5,
+                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(
+            Func<T1, T2, T3, T4, T5, TResult> projector, string sql, params object[] args);
 
         #endregion
 
@@ -356,7 +471,7 @@ namespace PetaPoco
         /// index and <paramref name="maxItemsPerPage"/> values.
         /// </remarks>
         /// <inheritdoc cref="Fetch{T}(long, long, string, object[])"/>
-        List<T> Fetch<T>(long page, long maxItemsPerPage);
+        List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage);
 
         /// <remarks>
         /// This method performs essentially the same operation as <see cref="SkipTake{T}(long, long, Sql)"/>. Determining the number of
@@ -367,7 +482,7 @@ namespace PetaPoco
         /// <param name="maxItemsPerPage">The maximum number of records per page.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="Fetch{T}(long, long, string, object[])"/>
-        List<T> Fetch<T>(long page, long maxItemsPerPage, Sql sql);
+        List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql sql);
 
         /// <summary>
         /// Executes a query for a subset of records based on the specified parameters, and returns the results as a list of type
@@ -384,7 +499,7 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>A list containing at most <paramref name="maxItemsPerPage"/> POCOs of type <typeparamref name="T"/>.</returns>
-        List<T> Fetch<T>(long page, long maxItemsPerPage, string sql, params object[] args);
+        List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string sql, params object[] args);
 
         #endregion
 
@@ -403,13 +518,13 @@ namespace PetaPoco
         /// <param name="page">The one-based page number used to calculate the number of records to skip.</param>
         /// <param name="maxItemsPerPage">The maximum number of records per page.</param>
         /// <returns>An initialized <see cref="PetaPoco.Page{T}"/> containing a list of POCOs.</returns>
-        Page<T> Page<T>(long page, long maxItemsPerPage);
+        Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage);
 
         /// <param name="page">The one-based page number used to calculate the number of records to skip.</param>
         /// <param name="maxItemsPerPage">The maximum number of records per page.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="Page{T}(long, long, string, object[])"/>
-        Page<T> Page<T>(long page, long maxItemsPerPage, Sql sql);
+        Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql sql);
 
         /// <summary>
         /// Executes a query for a subset of records based on the specified parameters, and returns the results as a Page of type
@@ -425,7 +540,7 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>An initialized <see cref="PetaPoco.Page{T}"/> containing a list of POCOs.</returns>
-        Page<T> Page<T>(long page, long maxItemsPerPage, string sql, params object[] args);
+        Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string sql, params object[] args);
 
         /// <param name="page">The one-based page number for this page.</param>
         /// <param name="maxItemsPerPage">The maximum number of records per page.</param>
@@ -434,7 +549,7 @@ namespace PetaPoco
         /// <param name="pageSql">An SQL builder instance representing the SQL statement and its parameters, used to retrieve a single page
         /// of results.</param>
         /// <inheritdoc cref="Page{T}(long, long, string, object[], string, object[])"/>
-        Page<T> Page<T>(long page, long maxItemsPerPage, Sql countSql, Sql pageSql);
+        Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql countSql, Sql pageSql);
 
         /// <summary>
         /// Executes a query for a subset of records based on the specified parameters, and returns the results as a Page of type
@@ -452,7 +567,7 @@ namespace PetaPoco
         /// <param name="pageSql">The SQL statement used to retrieve a single page of results.</param>
         /// <param name="pageArgs">The parameters to embed in the <paramref name="pageSql"/> string.</param>
         /// <returns>An initialized <see cref="PetaPoco.Page{T}"/> containing a list of POCOs.</returns>
-        Page<T> Page<T>(long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs);
+        Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs);
 
         #endregion
 
@@ -469,13 +584,13 @@ namespace PetaPoco
         /// <param name="skip">The number of records to skip.</param>
         /// <param name="take">The number of records to take.</param>
         /// <returns>A list of POCOs of type <typeparamref name="T"/>.</returns>
-        List<T> SkipTake<T>(long skip, long take);
+        List<T> SkipTake<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take);
 
         /// <param name="skip">The number of records to skip.</param>
         /// <param name="take">The number of records to take.</param>
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="SkipTake{T}(long, long, string, object[])"/>
-        List<T> SkipTake<T>(long skip, long take, Sql sql);
+        List<T> SkipTake<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take, Sql sql);
 
         /// <summary>
         /// Executes a query and returns a subset of the results as a list of type <typeparamref name="T"/>.
@@ -490,7 +605,7 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>A list of POCOs of type <typeparamref name="T"/>.</returns>
-        List<T> SkipTake<T>(long skip, long take, string sql, params object[] args);
+        List<T> SkipTake<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take, string sql, params object[] args);
 
         #endregion
 
@@ -507,7 +622,7 @@ namespace PetaPoco
         /// <param name="pocoOrPrimaryKeyValue">The primary key value, or a POCO containing an assigned primary key value.</param>
         /// <returns><see langword="true"/> if one or more records exist with the specified primary key value; otherwise, <see
         /// langword="false"/>.</returns>
-        bool Exists<T>(object pocoOrPrimaryKeyValue);
+        bool Exists<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object pocoOrPrimaryKeyValue);
 
         // TODO: Missing overload: `bool IQuery.Exists<T>(Sql)`
 
@@ -519,7 +634,7 @@ namespace PetaPoco
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns><see langword="true"/> if one or more records exist that satisfy the conditions defined in the specified query;
         /// otherwise, <see langword="false"/>.</returns>
-        bool Exists<T>(string sql, params object[] args);
+        bool Exists<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         #endregion
 
@@ -534,11 +649,11 @@ namespace PetaPoco
         /// <returns>The single result returned by the query.</returns>
         /// <exception cref="InvalidOperationException">The result set is empty, or the result set contains more than one
         /// record.</exception>
-        T Single<T>(object primaryKey);
+        T Single<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object primaryKey);
 
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="Single{T}(string, object[])"/>
-        T Single<T>(Sql sql);
+        T Single<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <summary>
         /// Returns the only record that matches the specified query, and throws an exception if there is not exactly one matching record.
@@ -549,7 +664,7 @@ namespace PetaPoco
         /// <returns>The single result returned by the query.</returns>
         /// <exception cref="InvalidOperationException">The result set is empty, or the result set contains more than one
         /// record.</exception>
-        T Single<T>(string sql, params object[] args);
+        T Single<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         #endregion
 
@@ -563,11 +678,11 @@ namespace PetaPoco
         /// <param name="primaryKey">The primary key value.</param>
         /// <returns>default(T) if no record is found; otherwise, the single result returned by the query.</returns>
         /// <exception cref="InvalidOperationException">The result set contains more than one record.</exception>
-        T SingleOrDefault<T>(object primaryKey);
+        T SingleOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object primaryKey);
 
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="SingleOrDefault{T}(string, object[])"/>
-        T SingleOrDefault<T>(Sql sql);
+        T SingleOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]  T>(Sql sql);
 
         /// <summary>
         /// Returns the only record that matches the specified query, or a default value if the result set is empty; this method throws an
@@ -578,7 +693,7 @@ namespace PetaPoco
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>default(T) if no record is found; otherwise, the single result returned by the query.</returns>
         /// <exception cref="InvalidOperationException">The result set contains more than one record.</exception>
-        T SingleOrDefault<T>(string sql, params object[] args);
+        T SingleOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         #endregion
 
@@ -586,7 +701,7 @@ namespace PetaPoco
 
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="First{T}(string, object[])"/>
-        T First<T>(Sql sql);
+        T First<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <summary>
         /// Returns the first record that matches the specified query, and throws an exception if the result set is empty.
@@ -596,7 +711,7 @@ namespace PetaPoco
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>The first result record returned by the specified query.</returns>
         /// <exception cref="InvalidOperationException">The result set is empty.</exception>
-        T First<T>(string sql, params object[] args);
+        T First<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         #endregion
 
@@ -604,7 +719,7 @@ namespace PetaPoco
 
         /// <param name="sql">An SQL builder instance representing the SQL query and its parameters.</param>
         /// <inheritdoc cref="FirstOrDefault{T}(string, object[])"/>
-        T FirstOrDefault<T>(Sql sql);
+        T FirstOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <summary>
         /// Returns the first record that matches the specified query, or a default value if the result set is empty.
@@ -613,7 +728,7 @@ namespace PetaPoco
         /// <param name="sql">The SQL query string.</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>default(T) if the result set is empty; otherwise, the first record that matches the specified query.</returns>
-        T FirstOrDefault<T>(string sql, params object[] args);
+        T FirstOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         #endregion
     }

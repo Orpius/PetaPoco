@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,16 +16,16 @@ namespace PetaPoco
         Task<int> ExecuteNonQueryProcAsync(string storedProcedureName, params object[] args);
 
         /// <inheritdoc cref="ExecuteScalarProcAsync{T}(CancellationToken, string, object[])"/>
-        Task<T> ExecuteScalarProcAsync<T>(string storedProcedureName, params object[] args);
+        Task<T> ExecuteScalarProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args);
 
         /// <inheritdoc cref="QueryProcAsync{T}(CancellationToken, string, object[])"/>
-        Task<IAsyncReader<T>> QueryProcAsync<T>(string storedProcedureName, params object[] args);
+        Task<IAsyncReader<T>> QueryProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args);
 
         /// <inheritdoc cref="QueryProcAsync{T}(Action{T}, CancellationToken, string, object[])"/>
-        Task QueryProcAsync<T>(Action<T> action, string storedProcedureName, params object[] args);
+        Task QueryProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, string storedProcedureName, params object[] args);
 
         /// <inheritdoc cref="FetchProcAsync{T}(CancellationToken, string, object[])"/>
-        Task<List<T>> FetchProcAsync<T>(string storedProcedureName, params object[] args);
+        Task<List<T>> FetchProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args);
 
         /// <summary>
         /// Asynchronously executes a non-query stored procedure and returns the number of rows affected.
@@ -56,7 +57,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains the scalar result value of type <typeparamref
         /// name="T"/>.
         /// </returns>
-        Task<T> ExecuteScalarProcAsync<T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args);
+        Task<T> ExecuteScalarProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args);
 
         /// <summary>
         /// Asynchronously executes a query stored procedure and returns an IAsyncReader of type <typeparamref name="T"/>.
@@ -73,7 +74,7 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains an <see cref="IAsyncReader{T}"/> for reading the
         /// result set.
         /// </returns>
-        Task<IAsyncReader<T>> QueryProcAsync<T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args);
+        Task<IAsyncReader<T>> QueryProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args);
 
         /// <summary>
         /// Asynchronously executes a query stored procedure and invokes the specified action on each POCO in the result set.
@@ -90,7 +91,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        Task QueryProcAsync<T>(Action<T> action, CancellationToken cancellationToken, string storedProcedureName, params object[] args);
+        Task QueryProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, string storedProcedureName, params object[] args);
 
         /// <summary>
         /// Asynchronously executes a query stored procedure and returns a list of type <typeparamref name="T"/>.
@@ -106,7 +107,7 @@ namespace PetaPoco
         /// <returns>
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
-        Task<List<T>> FetchProcAsync<T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args);
+        Task<List<T>> FetchProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args);
     }
 #endif
 }

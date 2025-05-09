@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PetaPoco
 {
@@ -108,7 +109,7 @@ namespace PetaPoco
         /// <param name="sql">An SQL builder instance representing the condition portion of the WHERE clause identifying the row to update
         /// (everything after <c>UPDATE tablename</c>) and its parameters.</param>
         /// <returns>The number of rows affected by the update operation.</returns>
-        int Update<T>(Sql sql);
+        int Update<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <summary>
         /// Executes an SQL update and returns the number of rows affected by the update operation.
@@ -118,7 +119,7 @@ namespace PetaPoco
         /// (everything after <c>UPDATE tablename</c>).</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>The number of rows affected by the update operation.</returns>
-        int Update<T>(string sql, params object[] args);
+        int Update<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         #endregion
 
@@ -158,7 +159,7 @@ namespace PetaPoco
         /// <typeparam name="T">The POCO type associated with the table to delete.</typeparam>
         /// <param name="pocoOrPrimaryKeyValue">The primary key value, or a POCO containing an assigned primary key value.</param>
         /// <returns>The number of rows affected by the delete operation.</returns>
-        int Delete<T>(object pocoOrPrimaryKeyValue);
+        int Delete<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object pocoOrPrimaryKeyValue);
 
         /// <summary>
         /// Executes an SQL delete and returns the number of rows affected by the delete operation.
@@ -167,7 +168,7 @@ namespace PetaPoco
         /// <param name="sql">An SQL builder instance representing the condition portion of the WHERE clause identifying the row to delete
         /// (everything after <c>DELETE FROM tablename</c>) and its parameters.</param>
         /// <returns>The number of rows affected by the delete operation.</returns>
-        int Delete<T>(Sql sql);
+        int Delete<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql);
 
         /// <summary>
         /// Executes an SQL delete and returns the number of rows affected by the delete operation.
@@ -177,7 +178,7 @@ namespace PetaPoco
         /// (everything after <c>DELETE FROM tablename</c>).</param>
         /// <param name="args">The parameters to embed in the SQL string.</param>
         /// <returns>The number of rows affected by the delete operation.</returns>
-        int Delete<T>(string sql, params object[] args);
+        int Delete<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args);
 
         #endregion
 

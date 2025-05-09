@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace PetaPoco
@@ -7,7 +8,7 @@ namespace PetaPoco
     /// Specifies a set of methods for asynchronously reading data as POCO objects from a data source.
     /// </summary>
     /// <typeparam name="T">The POCO type representing a single result record.</typeparam>
-    public interface IAsyncReader<out T> : IDisposable
+    public interface IAsyncReader<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] out T> : IDisposable
     {
         /// <summary>
         /// Gets the current POCO object of type <typeparamref name="T"/> that the reader is positioned at.

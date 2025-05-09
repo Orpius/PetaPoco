@@ -1,10 +1,11 @@
-﻿using PetaPoco.Core;
-using PetaPoco.Internal;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using PetaPoco.Core;
+using PetaPoco.Internal;
 
 namespace PetaPoco
 {
@@ -27,7 +28,7 @@ namespace PetaPoco
         /// </summary>
         /// <param name="type">The type to be managed by this mapper.</param>
         /// <param name="mapper">The mapper to register.</param>
-        public static bool Register(Type type, IMapper mapper) => RegisterInternal(type, mapper);
+        public static bool Register([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type, IMapper mapper) => RegisterInternal(type, mapper);
 
         /// <summary>
         /// Revokes all mappers for all types in the specified assembly.
@@ -39,7 +40,7 @@ namespace PetaPoco
         /// Revokes a mapper for the specified POCO type.
         /// </summary>
         /// <param name="type">The type of the mapper to be revoked.</param>
-        public static bool Revoke(Type type) => RevokeInternal(type);
+        public static bool Revoke([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type) => RevokeInternal(type);
 
         /// <summary>
         /// Revokes the specified mapper instance.
@@ -73,7 +74,8 @@ namespace PetaPoco
         /// <param name="entityType">The entity type to get the mapper for.</param>
         /// <param name="defaultMapper">The default mapper to use when none is registered for the type.</param>
         /// <returns>The mapper for the given type.</returns>
-        public static IMapper GetMapper(Type entityType, IMapper defaultMapper)
+        public static IMapper GetMapper([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type entityType, 
+                                        IMapper defaultMapper)
         {
             if (_mappers.TryGetValue(entityType, out Lazy<IMapper> val))
                 return val.Value;

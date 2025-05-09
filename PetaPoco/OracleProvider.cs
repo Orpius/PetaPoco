@@ -1,5 +1,6 @@
 using System;
 using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace PetaPoco
@@ -94,7 +95,7 @@ namespace PetaPoco
         /// <returns>The Type, or <see langword="null"/> if unable to locate it.</returns>
         /// <exception cref="TypeLoadException">Unable to load <paramref name="typeName"/>.</exception>
         /// <exception cref="InvalidOperationException">Unable to find the <paramref name="assemblyName"/>.</exception>
-        public static Type TypeFromAssembly(string typeName, string assemblyName)
+        public static Type TypeFromAssembly([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string typeName, string assemblyName)
         {
             try
             {

@@ -18,8 +18,8 @@ namespace PetaPoco.Internal
     /// </remarks>
     internal static class ParametersHelper
     {
-        private static Regex ParamPrefixRegex = new Regex(@"(?<!@)@\w+", RegexOptions.Compiled);
-        private static Regex NonWordStartRegex = new Regex(@"^\W*", RegexOptions.Compiled);
+        private static Regex ParamPrefixRegex = new Regex(@"(?<!@)@\w+"/*, RegexOptions.Compiled (remove for AoT)*/);
+        private static Regex NonWordStartRegex = new Regex(@"^\W*"/*, RegexOptions.Compiled (remove for AoT)*/);
 
         /// <summary>
         /// Replaces all parameter prefixes in the provided SQL statement with the specified replacement string.

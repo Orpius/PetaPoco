@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PetaPoco.Core;
 using PetaPoco.Internal;
@@ -132,7 +133,8 @@ namespace PetaPoco
         /// <returns>A composite POCO of type <typeparamref name="T"/>.</returns>
         /// <exception cref="ObjectDisposedException">Called after the data reader has been disposed.</exception>
         /// <exception cref="InvalidOperationException">Result records are consumed in the incorrect order, or more than once.</exception>
-        private IEnumerable<T> MultiPocoFromIDataReader<T>(int index, Type[] types, object transformer)
+        private IEnumerable<T> MultiPocoFromIDataReader<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            int index, Type[] types, object transformer)
         {
             // TODO: Incorrect object name used when throwing ObjectDisposedException; should be `nameof(_reader)`
             if (_reader == null)

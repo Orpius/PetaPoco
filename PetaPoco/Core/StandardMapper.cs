@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace PetaPoco
@@ -12,13 +13,14 @@ namespace PetaPoco
     public class StandardMapper : IMapper
     {
         /// <inheritdoc/>
-        public virtual TableInfo GetTableInfo(Type pocoType) => TableInfo.FromPoco(pocoType);
+        public virtual TableInfo GetTableInfo([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type pocoType) 
+            => TableInfo.FromPoco(pocoType);
 
         /// <inheritdoc/>
         public virtual ColumnInfo GetColumnInfo(PropertyInfo pocoProperty) => ColumnInfo.FromProperty(pocoProperty);
 
         /// <inheritdoc/>
-        public virtual Func<object, object> GetFromDbConverter(PropertyInfo targetProperty, Type sourceType) => null;
+        public virtual Func<object, object> GetFromDbConverter(PropertyInfo targetProperty, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type sourceType) => null;
 
         /// <inheritdoc/>
         public virtual Func<object, object> GetToDbConverter(PropertyInfo sourceProperty) => null;

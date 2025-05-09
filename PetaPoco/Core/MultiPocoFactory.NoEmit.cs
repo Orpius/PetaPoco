@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -25,13 +26,13 @@ namespace PetaPoco.Internal
         //public Delegate GetItem(int index) => delegates[index];
 
         // Build (or fetch) a strongly-typed Func<T0, T1, …, T0> that wires child POCOs onto their parents
-        public static object GetAutoMapper(Type[] types)
+        public static object GetAutoMapper([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type[] types)
         {
             var key = new ArrayKey<Type>(types);
             return AutoMappers.GetOrAdd(key, () => BuildAutoMapper(types));
         }
 
-        private static Delegate BuildAutoMapper(Type[] types)
+        private static Delegate BuildAutoMapper([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type[] types)
         {
             // 1) Create one ParameterExpression per POCO type
             var parameters = types
@@ -96,7 +97,8 @@ namespace PetaPoco.Internal
 
         // (same as before—this still uses your PocoData to get single-POCO factories)
         private static Delegate FindSplitPoint(
-            Type typeThis, Type typeNext,
+            /*[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] */Type typeThis,
+            /*[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] */Type typeNext,
             string cs, string sql,
             IDataReader r, ref int pos,
             IMapper mapper)
@@ -183,9 +185,12 @@ namespace PetaPoco.Internal
             AutoMappers.Flush();
         }
 
-        public static Func<IDataReader, object, TRet> GetFactory<TRet>(
-            Type[] types, string cs, string sql,
-            IDataReader r, IMapper mapper)
+        public static Func<IDataReader, object, TRet> GetFactory<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TRet>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type[] types, 
+            string cs, 
+            string sql,
+            IDataReader r, 
+            IMapper mapper)
         {
             var key = Tuple.Create(typeof(TRet), new ArrayKey<Type>(types), cs, sql, r.FieldCount);
 

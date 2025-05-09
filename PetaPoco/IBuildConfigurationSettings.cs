@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PetaPoco
 {
@@ -22,6 +23,6 @@ namespace PetaPoco
         /// <param name="key">The setting's key.</param>
         /// <param name="onGetAction">The action to invoke with the setting's value when the setting is found.</param>
         /// <param name="onFailAction">An optional action to invoke if the setting cannot be found.</param>
-        void TryGetSetting<T>(string key, Action<T> onGetAction, Action onFailAction = null);
+        void TryGetSetting<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string key, Action<T> onGetAction, Action onFailAction = null);
     }
 }

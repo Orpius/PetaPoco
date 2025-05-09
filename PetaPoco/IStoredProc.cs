@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PetaPoco
 {
@@ -30,7 +31,7 @@ namespace PetaPoco
         /// <param name="storedProcedureName">The name of the stored procedure to execute.</param>
         /// <param name="args">The arguments to pass to the stored procedure.</param>
         /// <returns>The scalar result value of type <typeparamref name="T"/>.</returns>
-        T ExecuteScalarProc<T>(string storedProcedureName, params object[] args);
+        T ExecuteScalarProc<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args);
 
         /// <summary>
         /// Executes a query stored procedure and returns the results as a sequence of type <typeparamref name="T"/>.
@@ -43,7 +44,7 @@ namespace PetaPoco
         /// <param name="storedProcedureName">The name of the stored procedure to execute.</param>
         /// <param name="args">The arguments to pass to the stored procedure.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> sequence of results.</returns>
-        IEnumerable<T> QueryProc<T>(string storedProcedureName, params object[] args);
+        IEnumerable<T> QueryProc<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args);
 
         /// <summary>
         /// Executes a query stored procedure and returns the results as a list of type <typeparamref name="T"/>.
@@ -56,6 +57,6 @@ namespace PetaPoco
         /// <param name="storedProcedureName">The name of the stored procedure to execute.</param>
         /// <param name="args">The arguments to pass to the stored procedure.</param>
         /// <returns>A <see cref="List{T}"/> containing the results.</returns>
-        List<T> FetchProc<T>(string storedProcedureName, params object[] args);
+        List<T> FetchProc<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args);
     }
 }

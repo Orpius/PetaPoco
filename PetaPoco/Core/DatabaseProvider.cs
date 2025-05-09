@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 #if ASYNC
 using System.Threading;
@@ -145,7 +146,8 @@ namespace PetaPoco.Core
         /// <param name="connectionString">The connection string.</param>
         /// <returns>The resolved database provider.</returns>
         /// <exception cref="ArgumentException">The <paramref name="providerType"/> name cannot be matched to a provider.</exception>
-        internal static IProvider Resolve(Type providerType, bool allowDefault, string connectionString)
+        internal static IProvider Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type providerType, 
+                                          bool allowDefault, string connectionString)
         {
             var typeName = providerType.Name;
 

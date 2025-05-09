@@ -5,6 +5,7 @@ using System.Configuration;
 #endif
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
@@ -756,28 +757,28 @@ namespace PetaPoco
         #region ExecuteScalar, ExecuteScalarAsync
 
         /// <inheritdoc/>
-        public T ExecuteScalar<T>(Sql sql)
+        public T ExecuteScalar<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => ExecuteScalar<T>(sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public T ExecuteScalar<T>(string sql, params object[] args)
+        public T ExecuteScalar<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => ExecuteScalarInternal<T>(CommandType.Text, sql, args);
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<T> ExecuteScalarAsync<T>(Sql sql)
+        public Task<T> ExecuteScalarAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => ExecuteScalarInternalAsync<T>(CancellationToken.None, CommandType.Text, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task<T> ExecuteScalarAsync<T>(string sql, params object[] args)
+        public Task<T> ExecuteScalarAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => ExecuteScalarInternalAsync<T>(CancellationToken.None, CommandType.Text, sql, args);
 
         /// <inheritdoc/>
-        public Task<T> ExecuteScalarAsync<T>(CancellationToken cancellationToken, Sql sql)
+        public Task<T> ExecuteScalarAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql)
             => ExecuteScalarInternalAsync<T>(cancellationToken, CommandType.Text, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task<T> ExecuteScalarAsync<T>(CancellationToken cancellationToken, string sql, params object[] args)
+        public Task<T> ExecuteScalarAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
             => ExecuteScalarInternalAsync<T>(cancellationToken, CommandType.Text, sql, args);
 #endif
 
@@ -785,7 +786,7 @@ namespace PetaPoco
         /// <param name="sql">The SQL statement.</param>
         /// <param name="args">The parameters to embed in the SQL statement.</param>
         /// <inheritdoc cref="IExecute.ExecuteScalar(string, object[])"/>
-        protected virtual T ExecuteScalarInternal<T>(CommandType commandType, string sql, params object[] args)
+        protected virtual T ExecuteScalarInternal<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType, string sql, params object[] args)
         {
             try
             {
@@ -823,7 +824,8 @@ namespace PetaPoco
         /// <param name="sql">The SQL statement.</param>
         /// <param name="args">The parameters to embed in the SQL statement.</param>
         /// <inheritdoc cref="IExecuteAsync.ExecuteScalarAsync{T}(CancellationToken, string, object[])"/>
-        protected virtual async Task<T> ExecuteScalarInternalAsync<T>(CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args)
+        protected virtual async Task<T> ExecuteScalarInternalAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args)
         {
             try
             {
@@ -933,53 +935,53 @@ namespace PetaPoco
         }
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action)
             => QueryAsync(action, CancellationToken.None, CommandType.Text, string.Empty);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, Sql sql)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, Sql sql)
             => QueryAsync(action, CancellationToken.None, CommandType.Text, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, string sql, params object[] args)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, string sql, params object[] args)
             => QueryAsync(action, CancellationToken.None, CommandType.Text, sql, args);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken)
             => QueryAsync(action, cancellationToken, CommandType.Text, string.Empty);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, Sql sql)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, Sql sql)
             => QueryAsync(action, cancellationToken, CommandType.Text, sql.SQL, sql.Arguments);
 
         // TODO: QueryAsync(Action<T>, CancellationToken, string, object[]) takes a caller-provided CancellationToken, but uses a default empty token for wrapped call
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, string sql, params object[] args)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, string sql, params object[] args)
             => QueryAsync(action, CancellationToken.None, CommandType.Text, sql, args);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, CommandType commandType)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CommandType commandType)
             => QueryAsync(action, CancellationToken.None, commandType, string.Empty);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, CommandType commandType, Sql sql)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CommandType commandType, Sql sql)
             => QueryAsync(action, CancellationToken.None, commandType, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, CommandType commandType, string sql, params object[] args)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CommandType commandType, string sql, params object[] args)
             => QueryAsync(action, CancellationToken.None, commandType, sql, args);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType)
             => QueryAsync(action, cancellationToken, commandType, string.Empty);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, Sql sql)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, Sql sql)
             => QueryAsync(action, cancellationToken, commandType, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task QueryAsync<T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args)
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args)
         {
             if (EnableAutoSelect)
                 sql = AutoSelectHelper.AddSelectClause<T>(_provider, sql, _defaultMapper);
@@ -991,7 +993,7 @@ namespace PetaPoco
         /// <param name="sql">The SQL statement.</param>
         /// <param name="args">The parameters to embed in the SQL statement.</param>
         /// <inheritdoc cref="IQuery.Query{T}(string, object[])"/>
-        protected virtual IEnumerable<T> ExecuteReader<T>(CommandType commandType, string sql, params object[] args)
+        protected virtual IEnumerable<T> ExecuteReader<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType, string sql, params object[] args)
         {
             OpenSharedConnection();
             try
@@ -1044,7 +1046,7 @@ namespace PetaPoco
 
 #if ASYNC
         /// <inheritdoc cref="IQueryAsync.QueryAsync{T}(CancellationToken, CommandType, string, object[])"/>
-        protected virtual async Task<IAsyncReader<T>> ExecuteReaderAsync<T>(CancellationToken cancellationToken, CommandType commandType, string sql, object[] args)
+        protected virtual async Task<IAsyncReader<T>> ExecuteReaderAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, string sql, object[] args)
         {
             await OpenSharedConnectionAsync(cancellationToken).ConfigureAwait(false);
             var cmd = CreateCommand(_sharedConnection, commandType, sql, args);
@@ -1079,7 +1081,7 @@ namespace PetaPoco
         }
 
         /// <inheritdoc cref="IQueryAsync.QueryAsync{T}(Action{T}, CancellationToken, CommandType, string, object[])"/>
-        protected virtual async Task ExecuteReaderAsync<T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, string sql, object[] args)
+        protected virtual async Task ExecuteReaderAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, string sql, object[] args)
         {
             await OpenSharedConnectionAsync(cancellationToken).ConfigureAwait(false);
             try
@@ -1148,71 +1150,120 @@ namespace PetaPoco
         #region Query : Multi-POCO
 
         /// <inheritdoc/>
-        public IEnumerable<T1> Query<T1, T2>(Sql sql)
+        public IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2>(Sql sql)
             => Query<T1>(new[] { typeof(T1), typeof(T2) }, null, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public IEnumerable<T1> Query<T1, T2, T3>(Sql sql)
+        public IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3>(Sql sql)
             => Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3) }, null, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public IEnumerable<T1> Query<T1, T2, T3, T4>(Sql sql)
+        public IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4>(Sql sql)
             => Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, null, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public IEnumerable<T1> Query<T1, T2, T3, T4, T5>(Sql sql)
+        public IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5>(Sql sql)
             => Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, null, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public IEnumerable<T1> Query<T1, T2>(string sql, params object[] args)
+        public IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2>(string sql, params object[] args)
             => Query<T1>(new[] { typeof(T1), typeof(T2) }, null, sql, args);
 
         /// <inheritdoc/>
-        public IEnumerable<T1> Query<T1, T2, T3>(string sql, params object[] args)
+        public IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3>(string sql, params object[] args)
             => Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3) }, null, sql, args);
 
         /// <inheritdoc/>
-        public IEnumerable<T1> Query<T1, T2, T3, T4>(string sql, params object[] args)
+        public IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4>(string sql, params object[] args)
             => Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, null, sql, args);
 
         /// <inheritdoc/>
-        public IEnumerable<T1> Query<T1, T2, T3, T4, T5>(string sql, params object[] args)
+        public IEnumerable<T1> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5>(string sql, params object[] args)
             => Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, null, sql, args);
 
         /// <inheritdoc/>
-        public IEnumerable<TResult> Query<T1, T2, TResult>(Func<T1, T2, TResult> projector, Sql sql)
+        public IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, TResult> projector, Sql sql)
             => Query<TResult>(new[] { typeof(T1), typeof(T2) }, projector, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public IEnumerable<TResult> Query<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> projector, Sql sql)
+        public IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, TResult> projector, Sql sql)
             => Query<TResult>(new[] { typeof(T1), typeof(T2), typeof(T3) }, projector, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public IEnumerable<TResult> Query<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> projector, Sql sql)
+        public IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, T4, TResult> projector, Sql sql)
             => Query<TResult>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, projector, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public IEnumerable<TResult> Query<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, Sql sql)
+        public IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, Sql sql)
             => Query<TResult>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, projector, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public IEnumerable<TResult> Query<T1, T2, TResult>(Func<T1, T2, TResult> projector, string sql, params object[] args)
+        public IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, TResult> projector, string sql, params object[] args)
             => Query<TResult>(new[] { typeof(T1), typeof(T2) }, projector, sql, args);
 
         /// <inheritdoc/>
-        public IEnumerable<TResult> Query<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> projector, string sql, params object[] args)
+        public IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, TResult> projector, string sql, params object[] args)
             => Query<TResult>(new[] { typeof(T1), typeof(T2), typeof(T3) }, projector, sql, args);
 
         /// <inheritdoc/>
-        public IEnumerable<TResult> Query<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> projector, string sql, params object[] args)
+        public IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, T4, TResult> projector, string sql, params object[] args)
             => Query<TResult>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, projector, sql, args);
 
         /// <inheritdoc/>
-        public IEnumerable<TResult> Query<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, string sql, params object[] args)
+        public IEnumerable<TResult> Query<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5,
+                                          [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, string sql, params object[] args)
             => Query<TResult>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, projector, sql, args);
 
         /// <inheritdoc/>
-        public IEnumerable<TResult> Query<TResult>(Type[] types, object projector, string sql, params object[] args)
+        public IEnumerable<TResult> Query<TResult>([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type[] types, 
+                                                   object projector, string sql, params object[] args)
         {
             OpenSharedConnection();
             try
@@ -1312,66 +1363,66 @@ namespace PetaPoco
         #region Fetch, FetchAsync : Single-POCO
 
         /// <inheritdoc/>
-        public List<T> Fetch<T>()
+        public List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>()
             => Fetch<T>(string.Empty);
 
         /// <inheritdoc/>
-        public List<T> Fetch<T>(Sql sql)
+        public List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => Fetch<T>(sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public List<T> Fetch<T>(string sql, params object[] args)
+        public List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => Query<T>(sql, args).ToList();
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>()
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>()
             => FetchAsync<T>(CancellationToken.None, CommandType.Text, string.Empty);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(Sql sql)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => FetchAsync<T>(CancellationToken.None, CommandType.Text, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(string sql, params object[] args)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => FetchAsync<T>(CancellationToken.None, CommandType.Text, sql, args);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken)
             => FetchAsync<T>(cancellationToken, CommandType.Text, string.Empty);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, Sql sql)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql)
             => FetchAsync<T>(cancellationToken, CommandType.Text, sql.SQL, sql.Arguments);
 
         // TODO: FetchAsync(CancellationToken, string, object[]) takes a caller-provided CancellationToken, but uses a default empty token for wrapped call
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, string sql, params object[] args)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
             => FetchAsync<T>(CancellationToken.None, CommandType.Text, sql, args);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CommandType commandType)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType)
             => FetchAsync<T>(CancellationToken.None, CommandType.Text, string.Empty);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CommandType commandType, Sql sql)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType, Sql sql)
             => FetchAsync<T>(CancellationToken.None, commandType, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CommandType commandType, string sql, params object[] args)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType, string sql, params object[] args)
             => FetchAsync<T>(CancellationToken.None, commandType, sql, args);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, CommandType commandType)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType)
             => FetchAsync<T>(cancellationToken, commandType, string.Empty);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, CommandType commandType, Sql sql)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, Sql sql)
             => FetchAsync<T>(cancellationToken, commandType, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public async Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args)
+        public async Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args)
         {
             var pocos = new List<T>();
             await QueryAsync<T>(p => pocos.Add(p), cancellationToken, commandType, sql, args).ConfigureAwait(false);
@@ -1384,67 +1435,115 @@ namespace PetaPoco
         #region Fetch : Multi-POCO
 
         /// <inheritdoc/>
-        public List<T1> Fetch<T1, T2>(Sql sql)
+        public List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2>(Sql sql)
             => Query<T1, T2>(sql.SQL, sql.Arguments).ToList();
 
         /// <inheritdoc/>
-        public List<T1> Fetch<T1, T2, T3>(Sql sql)
+        public List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3>(Sql sql)
             => Query<T1, T2, T3>(sql.SQL, sql.Arguments).ToList();
 
         /// <inheritdoc/>
-        public List<T1> Fetch<T1, T2, T3, T4>(Sql sql)
+        public List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4>(Sql sql)
             => Query<T1, T2, T3, T4>(sql.SQL, sql.Arguments).ToList();
 
         /// <inheritdoc/>
-        public List<T1> Fetch<T1, T2, T3, T4, T5>(Sql sql)
+        public List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5>(Sql sql)
             => Query<T1, T2, T3, T4, T5>(sql.SQL, sql.Arguments).ToList();
 
         /// <inheritdoc/>
-        public List<T1> Fetch<T1, T2>(string sql, params object[] args)
+        public List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2>(string sql, params object[] args)
             => Query<T1, T2>(sql, args).ToList();
 
         /// <inheritdoc/>
-        public List<T1> Fetch<T1, T2, T3>(string sql, params object[] args)
+        public List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3>(string sql, params object[] args)
             => Query<T1, T2, T3>(sql, args).ToList();
 
         /// <inheritdoc/>
-        public List<T1> Fetch<T1, T2, T3, T4>(string sql, params object[] args)
+        public List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4>(string sql, params object[] args)
             => Query<T1, T2, T3, T4>(sql, args).ToList();
 
         /// <inheritdoc/>
-        public List<T1> Fetch<T1, T2, T3, T4, T5>(string sql, params object[] args)
+        public List<T1> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                              [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5>(string sql, params object[] args)
             => Query<T1, T2, T3, T4, T5>(sql, args).ToList();
 
         /// <inheritdoc/>
-        public List<TResult> Fetch<T1, T2, TResult>(Func<T1, T2, TResult> projector, Sql sql)
+        public List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, TResult> projector, Sql sql)
             => Query(projector, sql.SQL, sql.Arguments).ToList();
 
         /// <inheritdoc/>
-        public List<TResult> Fetch<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> projector, Sql sql)
+        public List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, TResult> projector, Sql sql)
             => Query(projector, sql.SQL, sql.Arguments).ToList();
 
         /// <inheritdoc/>
-        public List<TResult> Fetch<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> projector, Sql sql)
+        public List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, T4, TResult> projector, Sql sql)
             => Query(projector, sql.SQL, sql.Arguments).ToList();
 
         /// <inheritdoc/>
-        public List<TResult> Fetch<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, Sql sql)
+        public List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, Sql sql)
             => Query(projector, sql.SQL, sql.Arguments).ToList();
 
         /// <inheritdoc/>
-        public List<TResult> Fetch<T1, T2, TResult>(Func<T1, T2, TResult> projector, string sql, params object[] args)
+        public List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, TResult> projector, string sql, params object[] args)
             => Query(projector, sql, args).ToList();
 
         /// <inheritdoc/>
-        public List<TResult> Fetch<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> projector, string sql, params object[] args)
+        public List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, TResult> projector, string sql, params object[] args)
             => Query(projector, sql, args).ToList();
 
         /// <inheritdoc/>
-        public List<TResult> Fetch<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> projector, string sql, params object[] args)
+        public List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, T4, TResult> projector, string sql, params object[] args)
             => Query(projector, sql, args).ToList();
 
         /// <inheritdoc/>
-        public List<TResult> Fetch<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, string sql, params object[] args)
+        public List<TResult> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T1,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T2,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T3,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T4,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T5,
+                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TResult>(Func<T1, T2, T3, T4, T5, TResult> projector, string sql, params object[] args)
             => Query(projector, sql, args).ToList();
 
         #endregion
@@ -1452,32 +1551,32 @@ namespace PetaPoco
         #region Fetch, FetchAsync : Paged SkipTake
 
         /// <inheritdoc/>
-        public List<T> Fetch<T>(long page, long maxItemsPerPage)
+        public List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage)
             => Fetch<T>(page, maxItemsPerPage, string.Empty);
 
         /// <inheritdoc/>
-        public List<T> Fetch<T>(long page, long maxItemsPerPage, Sql sql)
+        public List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql sql)
             => SkipTake<T>((page - 1) * maxItemsPerPage, maxItemsPerPage, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public List<T> Fetch<T>(long page, long maxItemsPerPage, string sql, params object[] args)
+        public List<T> Fetch<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string sql, params object[] args)
             => SkipTake<T>((page - 1) * maxItemsPerPage, maxItemsPerPage, sql, args);
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(long page, long maxItemsPerPage)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage)
             => FetchAsync<T>(page, maxItemsPerPage, string.Empty);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(long page, long maxItemsPerPage, Sql sql)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql sql)
             => FetchAsync<T>(CancellationToken.None, page, maxItemsPerPage, sql);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(long page, long maxItemsPerPage, string sql, params object[] args)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string sql, params object[] args)
             => FetchAsync<T>(CancellationToken.None, page, maxItemsPerPage, sql, args);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage)
             => FetchAsync<T>(cancellationToken, page, maxItemsPerPage, string.Empty);
 
         /// <inheritdoc/>
@@ -1485,7 +1584,7 @@ namespace PetaPoco
             => SkipTakeAsync<T>(cancellationToken, (page - 1) * maxItemsPerPage, maxItemsPerPage, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string sql, params object[] args)
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string sql, params object[] args)
             => SkipTakeAsync<T>(cancellationToken, (page - 1) * maxItemsPerPage, maxItemsPerPage, sql, args);
 #endif
 
@@ -1494,67 +1593,67 @@ namespace PetaPoco
         #region Page, PageAsync
 
         /// <inheritdoc/>
-        public Page<T> Page<T>(long page, long maxItemsPerPage)
+        public Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage)
             => Page<T>(page, maxItemsPerPage, string.Empty);
 
         /// <inheritdoc/>
-        public Page<T> Page<T>(long page, long maxItemsPerPage, Sql sql)
+        public Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql sql)
             => Page<T>(page, maxItemsPerPage, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Page<T> Page<T>(long page, long maxItemsPerPage, string sql, params object[] args)
+        public Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string sql, params object[] args)
         {
             BuildPageQueries<T>((page - 1) * maxItemsPerPage, maxItemsPerPage, sql, ref args, out var countSql, out var pageSql);
             return Page<T>(page, maxItemsPerPage, countSql, args, pageSql, args);
         }
 
         /// <inheritdoc/>
-        public Page<T> Page<T>(long page, long maxItemsPerPage, Sql countSql, Sql pageSql)
+        public Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql countSql, Sql pageSql)
             => Page<T>(page, maxItemsPerPage, countSql.SQL, countSql.Arguments, pageSql.SQL, pageSql.Arguments);
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage)
+        public Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage)
             => PageAsync<T>(CancellationToken.None, page, maxItemsPerPage, string.Empty);
 
         /// <inheritdoc/>
-        public Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage, Sql sql)
+        public Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql sql)
             => PageAsync<T>(CancellationToken.None, page, maxItemsPerPage, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage, string sql, params object[] args)
+        public Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string sql, params object[] args)
             => PageAsync<T>(CancellationToken.None, page, maxItemsPerPage, sql, args);
 
         /// <inheritdoc/>
-        public Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage, Sql countSql, Sql pageSql)
+        public Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, Sql countSql, Sql pageSql)
             => PageAsync<T>(CancellationToken.None, page, maxItemsPerPage, countSql.SQL, countSql.Arguments, pageSql.SQL, pageSql.Arguments);
 
         /// <inheritdoc/>
-        public Task<Page<T>> PageAsync<T>(long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs)
+        public Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs)
             => PageAsync<T>(CancellationToken.None, page, maxItemsPerPage, countSql, countArgs, pageSql, pageArgs);
 
         /// <inheritdoc/>
-        public Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage)
+        public Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage)
             => PageAsync<T>(cancellationToken, page, maxItemsPerPage, string.Empty);
 
         /// <inheritdoc/>
-        public Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql sql)
+        public Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql sql)
             => PageAsync<T>(cancellationToken, page, maxItemsPerPage, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string sql, params object[] args)
+        public Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string sql, params object[] args)
         {
             BuildPageQueries<T>((page - 1) * maxItemsPerPage, maxItemsPerPage, sql, ref args, out var countSql, out var pageSql);
             return PageAsync<T>(cancellationToken, page, maxItemsPerPage, countSql, args, pageSql, args);
         }
 
         /// <inheritdoc/>
-        public Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql countSql, Sql pageSql)
+        public Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, Sql countSql, Sql pageSql)
             => PageAsync<T>(cancellationToken, page, maxItemsPerPage, countSql.SQL, countSql.Arguments, pageSql.SQL, pageSql.Arguments);
 #endif
 
         /// <inheritdoc/>
-        public Page<T> Page<T>(long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs)
+        public Page<T> Page<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs)
         {
             // Save the one-time command time out and use it for both queries
             var saveTimeout = OneTimeCommandTimeout;
@@ -1580,7 +1679,7 @@ namespace PetaPoco
 
 #if ASYNC
         /// <inheritdoc/>
-        public async Task<Page<T>> PageAsync<T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs)
+        public async Task<Page<T>> PageAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long page, long maxItemsPerPage, string countSql, object[] countArgs, string pageSql, object[] pageArgs)
         {
             var saveTimeout = OneTimeCommandTimeout;
 
@@ -1608,15 +1707,15 @@ namespace PetaPoco
         #region SkipTake, SkipTakeAsync
 
         /// <inheritdoc/>
-        public List<T> SkipTake<T>(long skip, long take)
+        public List<T> SkipTake<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take)
             => SkipTake<T>(skip, take, string.Empty);
 
         /// <inheritdoc/>
-        public List<T> SkipTake<T>(long skip, long take, Sql sql)
+        public List<T> SkipTake<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take, Sql sql)
             => SkipTake<T>(skip, take, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public List<T> SkipTake<T>(long skip, long take, string sql, params object[] args)
+        public List<T> SkipTake<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take, string sql, params object[] args)
         {
             BuildPageQueries<T>(skip, take, sql, ref args, out var countSql, out var pageSql);
             return Fetch<T>(pageSql, args);
@@ -1624,29 +1723,29 @@ namespace PetaPoco
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<List<T>> SkipTakeAsync<T>(long skip, long take)
+        public Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take)
             => SkipTakeAsync<T>(CancellationToken.None, skip, take, string.Empty);
 
         // TODO: SkipTakeAsync(long, long, Sql) should forward call to an overload that receives a CancellationToken
 
         /// <inheritdoc/>
-        public Task<List<T>> SkipTakeAsync<T>(long skip, long take, Sql sql)
+        public Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take, Sql sql)
             => SkipTakeAsync<T>(skip, take, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task<List<T>> SkipTakeAsync<T>(long skip, long take, string sql, params object[] args)
+        public Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(long skip, long take, string sql, params object[] args)
             => SkipTakeAsync<T>(CancellationToken.None, skip, take, sql, args);
 
         /// <inheritdoc/>
-        public Task<List<T>> SkipTakeAsync<T>(CancellationToken cancellationToken, long skip, long take)
+        public Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long skip, long take)
             => SkipTakeAsync<T>(cancellationToken, skip, take, string.Empty);
 
         /// <inheritdoc/>
-        public Task<List<T>> SkipTakeAsync<T>(CancellationToken cancellationToken, long skip, long take, Sql sql)
+        public Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long skip, long take, Sql sql)
             => SkipTakeAsync<T>(cancellationToken, skip, take, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public Task<List<T>> SkipTakeAsync<T>(CancellationToken cancellationToken, long skip, long take, string sql, params object[] args)
+        public Task<List<T>> SkipTakeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, long skip, long take, string sql, params object[] args)
         {
             BuildPageQueries<T>(skip, take, sql, ref args, out var countSql, out var pageSql);
             return FetchAsync<T>(cancellationToken, pageSql, args);
@@ -1665,7 +1764,8 @@ namespace PetaPoco
         /// <param name="countSql">When this method returns, contains the SQL statement to query for the total number of records.</param>
         /// <param name="pageSql">When this method returns, contains the SQL statement to retrieve a single page of records.</param>
         /// <exception cref="Exception">Unable to parse the given <paramref name="sql"/> statement.</exception>
-        protected virtual void BuildPageQueries<T>(long skip, long take, string sql, ref object[] args, out string countSql, out string pageSql)
+        protected virtual void BuildPageQueries<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            long skip, long take, string sql, ref object[] args, out string countSql, out string pageSql)
         {
             if (EnableAutoSelect)
                 sql = AutoSelectHelper.AddSelectClause<T>(_provider, sql, _defaultMapper);
@@ -1692,7 +1792,7 @@ namespace PetaPoco
         /// ]]>
         /// </code>
         /// </example>
-        public bool Exists<T>(object pocoOrPrimaryKeyValue)
+        public bool Exists<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object pocoOrPrimaryKeyValue)
         {
             var poco = PocoData.ForType(typeof(T), _defaultMapper);
             return Exists<T>($"{_provider.EscapeSqlIdentifier(poco.TableInfo.PrimaryKey)}=@0",
@@ -1709,7 +1809,7 @@ namespace PetaPoco
         /// ]]>
         /// </code>
         /// </example>
-        public bool Exists<T>(string sql, params object[] args)
+        public bool Exists<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
         {
             var poco = PocoData.ForType(typeof(T), _defaultMapper).TableInfo;
 
@@ -1721,15 +1821,15 @@ namespace PetaPoco
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<bool> ExistsAsync<T>(object pocoOrPrimaryKeyValue)
+        public Task<bool> ExistsAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object pocoOrPrimaryKeyValue)
             => ExistsAsync<T>(CancellationToken.None, pocoOrPrimaryKeyValue);
 
         /// <inheritdoc/>
-        public Task<bool> ExistsAsync<T>(string sql, params object[] args)
+        public Task<bool> ExistsAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => ExistsAsync<T>(CancellationToken.None, sql, args);
 
         /// <inheritdoc/>
-        public Task<bool> ExistsAsync<T>(CancellationToken cancellationToken, object pocoOrPrimaryKeyValue)
+        public Task<bool> ExistsAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, object pocoOrPrimaryKeyValue)
         {
             var poco = PocoData.ForType(typeof(T), _defaultMapper);
             return ExistsAsync<T>(cancellationToken, $"{_provider.EscapeSqlIdentifier(poco.TableInfo.PrimaryKey)}=@0",
@@ -1737,7 +1837,7 @@ namespace PetaPoco
         }
 
         /// <inheritdoc/>
-        public async Task<bool> ExistsAsync<T>(CancellationToken cancellationToken, string sql, params object[] args)
+        public async Task<bool> ExistsAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
         {
             var poco = PocoData.ForType(typeof(T), _defaultMapper).TableInfo;
 
@@ -1756,40 +1856,40 @@ namespace PetaPoco
         #region Single, SingleAsync
 
         /// <inheritdoc/>
-        public T Single<T>(object primaryKey)
+        public T Single<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object primaryKey)
             => Single<T>(GenerateSingleByKeySql<T>(primaryKey));
 
         /// <inheritdoc/>
-        public T Single<T>(Sql sql)
+        public T Single<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => Query<T>(sql).Single();
 
         /// <inheritdoc/>
-        public T Single<T>(string sql, params object[] args)
+        public T Single<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => Query<T>(sql, args).Single();
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<T> SingleAsync<T>(object primaryKey)
+        public Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object primaryKey)
             => SingleAsync<T>(CancellationToken.None, primaryKey);
 
         /// <inheritdoc/>
-        public Task<T> SingleAsync<T>(Sql sql)
+        public Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => SingleAsync<T>(CancellationToken.None, sql);
 
         /// <inheritdoc/>
-        public Task<T> SingleAsync<T>(string sql, params object[] args)
+        public Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => SingleAsync<T>(CancellationToken.None, sql, args);
 
         /// <inheritdoc/>
-        public Task<T> SingleAsync<T>(CancellationToken cancellationToken, object primaryKey)
+        public Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, object primaryKey)
             => SingleAsync<T>(cancellationToken, GenerateSingleByKeySql<T>(primaryKey));
 
         /// <inheritdoc/>
-        public Task<T> SingleAsync<T>(CancellationToken cancellationToken, Sql sql)
+        public Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql)
             => SingleAsync<T>(cancellationToken, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public async Task<T> SingleAsync<T>(CancellationToken cancellationToken, string sql, params object[] args)
+        public async Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
             => (await FetchAsync<T>(cancellationToken, sql, args).ConfigureAwait(false)).Single();
 #endif
 
@@ -1798,44 +1898,44 @@ namespace PetaPoco
         #region SingleOrDefault, SingleOrDefaultAsync
 
         /// <inheritdoc/>
-        public T SingleOrDefault<T>(object primaryKey)
+        public T SingleOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object primaryKey)
             => SingleOrDefault<T>(GenerateSingleByKeySql<T>(primaryKey));
 
         /// <inheritdoc/>
-        public T SingleOrDefault<T>(Sql sql)
+        public T SingleOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => Query<T>(sql).SingleOrDefault();
 
         /// <inheritdoc/>
-        public T SingleOrDefault<T>(string sql, params object[] args)
+        public T SingleOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => Query<T>(sql, args).SingleOrDefault();
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<T> SingleOrDefaultAsync<T>(object primaryKey)
+        public Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object primaryKey)
             => SingleOrDefaultAsync<T>(CancellationToken.None, primaryKey);
 
         /// <inheritdoc/>
-        public Task<T> SingleOrDefaultAsync<T>(Sql sql)
+        public Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => SingleOrDefaultAsync<T>(CancellationToken.None, sql);
 
         /// <inheritdoc/>
-        public Task<T> SingleOrDefaultAsync<T>(string sql, params object[] args)
+        public Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => SingleOrDefaultAsync<T>(CancellationToken.None, sql, args);
 
         /// <inheritdoc/>
-        public Task<T> SingleOrDefaultAsync<T>(CancellationToken cancellationToken, object primaryKey)
+        public Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, object primaryKey)
             => SingleOrDefaultAsync<T>(cancellationToken, GenerateSingleByKeySql<T>(primaryKey));
 
         /// <inheritdoc/>
-        public Task<T> SingleOrDefaultAsync<T>(CancellationToken cancellationToken, Sql sql)
+        public Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql)
             => SingleOrDefaultAsync<T>(cancellationToken, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public async Task<T> SingleOrDefaultAsync<T>(CancellationToken cancellationToken, string sql, params object[] args)
+        public async Task<T> SingleOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
             => (await FetchAsync<T>(cancellationToken, sql, args).ConfigureAwait(false)).SingleOrDefault();
 #endif
 
-        private Sql GenerateSingleByKeySql<T>(object primaryKey)
+        private Sql GenerateSingleByKeySql<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object primaryKey)
         {
             string pkName = _provider.EscapeSqlIdentifier(PocoData.ForType(typeof(T), _defaultMapper).TableInfo.PrimaryKey);
             var sql = $"WHERE {pkName} = @0";
@@ -1852,28 +1952,28 @@ namespace PetaPoco
         #region First, FirstAsync
 
         /// <inheritdoc/>
-        public T First<T>(Sql sql)
+        public T First<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => Query<T>(sql).First();
 
         /// <inheritdoc/>
-        public T First<T>(string sql, params object[] args)
+        public T First<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => Query<T>(sql, args).First();
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<T> FirstAsync<T>(Sql sql)
+        public Task<T> FirstAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => FirstAsync<T>(CancellationToken.None, sql);
 
         /// <inheritdoc/>
-        public Task<T> FirstAsync<T>(string sql, params object[] args)
+        public Task<T> FirstAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => FirstAsync<T>(CancellationToken.None, sql, args);
 
         /// <inheritdoc/>
-        public Task<T> FirstAsync<T>(CancellationToken cancellationToken, Sql sql)
+        public Task<T> FirstAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql)
             => FirstAsync<T>(cancellationToken, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public async Task<T> FirstAsync<T>(CancellationToken cancellationToken, string sql, params object[] args)
+        public async Task<T> FirstAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
             => (await FetchAsync<T>(cancellationToken, sql, args).ConfigureAwait(false)).First();
 #endif
 
@@ -1882,28 +1982,28 @@ namespace PetaPoco
         #region FirstOrDefault, FirstOrDefaultAsync
 
         /// <inheritdoc/>
-        public T FirstOrDefault<T>(Sql sql)
+        public T FirstOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => Query<T>(sql).FirstOrDefault();
 
         /// <inheritdoc/>
-        public T FirstOrDefault<T>(string sql, params object[] args)
+        public T FirstOrDefault<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => Query<T>(sql, args).FirstOrDefault();
 
 #if ASYNC
         /// <inheritdoc/>
-        public Task<T> FirstOrDefaultAsync<T>(Sql sql)
+        public Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => FirstOrDefaultAsync<T>(CancellationToken.None, sql);
 
         /// <inheritdoc/>
-        public Task<T> FirstOrDefaultAsync<T>(string sql, params object[] args)
+        public Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => FirstOrDefaultAsync<T>(CancellationToken.None, sql, args);
 
         /// <inheritdoc/>
-        public Task<T> FirstOrDefaultAsync<T>(CancellationToken cancellationToken, Sql sql)
+        public Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, Sql sql)
             => FirstOrDefaultAsync<T>(cancellationToken, sql.SQL, sql.Arguments);
 
         /// <inheritdoc/>
-        public async Task<T> FirstOrDefaultAsync<T>(CancellationToken cancellationToken, string sql, params object[] args)
+        public async Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
             => (await FetchAsync<T>(cancellationToken, sql, args).ConfigureAwait(false)).FirstOrDefault();
 #endif
 
@@ -2274,7 +2374,7 @@ namespace PetaPoco
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"><paramref name="sql"/> is null.</exception>
-        public int Update<T>(Sql sql)
+        public int Update<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
         {
             if (sql == null)
                 throw new ArgumentNullException(nameof(sql));
@@ -2285,7 +2385,7 @@ namespace PetaPoco
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"><paramref name="sql"/> is null or empty.</exception>
-        public int Update<T>(string sql, params object[] args)
+        public int Update<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
         {
             if (string.IsNullOrEmpty(sql))
                 throw new ArgumentNullException(nameof(sql));
@@ -2341,12 +2441,12 @@ namespace PetaPoco
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"><paramref name="sql"/> is null.</exception>
-        public Task<int> UpdateAsync<T>(Sql sql)
+        public Task<int> UpdateAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => UpdateAsync<T>(CancellationToken.None, sql);
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"><paramref name="sql"/> is null or empty.</exception>
-        public Task<int> UpdateAsync<T>(string sql, params object[] args)
+        public Task<int> UpdateAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => UpdateAsync<T>(CancellationToken.None, sql, args);
 
         /// <inheritdoc/>
@@ -2418,7 +2518,8 @@ namespace PetaPoco
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"><paramref name="sql"/> is null.</exception>
-        public Task<int> UpdateAsync<T>(CancellationToken cancellationToken, Sql sql)
+        public Task<int> UpdateAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            CancellationToken cancellationToken, Sql sql)
         {
             if (sql == null)
                 throw new ArgumentNullException(nameof(sql));
@@ -2429,7 +2530,8 @@ namespace PetaPoco
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"><paramref name="sql"/> is null or empty.</exception>
-        public Task<int> UpdateAsync<T>(CancellationToken cancellationToken, string sql, params object[] args)
+        public Task<int> UpdateAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            CancellationToken cancellationToken, string sql, params object[] args)
         {
             if (string.IsNullOrEmpty(sql))
                 throw new ArgumentNullException(nameof(sql));
@@ -2595,7 +2697,7 @@ namespace PetaPoco
 
         /// <inheritdoc/>
         /// <exception cref="InvalidOperationException">Anonymous type does not contain an id for primary key column.</exception>
-        public int Delete<T>(object pocoOrPrimaryKeyValue)
+        public int Delete<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object pocoOrPrimaryKeyValue)
         {
             if (pocoOrPrimaryKeyValue.GetType() == typeof(T))
                 return Delete(pocoOrPrimaryKeyValue);
@@ -2616,14 +2718,14 @@ namespace PetaPoco
         }
 
         /// <inheritdoc/>
-        public int Delete<T>(Sql sql)
+        public int Delete<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
         {
             var pd = PocoData.ForType(typeof(T), _defaultMapper);
             return Execute(new Sql($"DELETE FROM {_provider.EscapeTableName(pd.TableInfo.TableName)}").Append(sql));
         }
 
         /// <inheritdoc/>
-        public int Delete<T>(string sql, params object[] args)
+        public int Delete<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
         {
             var pd = PocoData.ForType(typeof(T), _defaultMapper);
             return Execute($"DELETE FROM {_provider.EscapeTableName(pd.TableInfo.TableName)} {sql}", args);
@@ -2644,15 +2746,15 @@ namespace PetaPoco
 
         /// <inheritdoc/>
         /// <exception cref="InvalidOperationException">Anonymous type does not contain an id for primary key column.</exception>
-        public Task<int> DeleteAsync<T>(object pocoOrPrimaryKeyValue)
+        public Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object pocoOrPrimaryKeyValue)
             => DeleteAsync<T>(CancellationToken.None, pocoOrPrimaryKeyValue);
 
         /// <inheritdoc/>
-        public Task<int> DeleteAsync<T>(Sql sql)
+        public Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Sql sql)
             => DeleteAsync<T>(CancellationToken.None, sql);
 
         /// <inheritdoc/>
-        public Task<int> DeleteAsync<T>(string sql, params object[] args)
+        public Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string sql, params object[] args)
             => DeleteAsync<T>(CancellationToken.None, sql, args);
 
         /// <inheritdoc/>
@@ -2682,7 +2784,8 @@ namespace PetaPoco
 
         /// <inheritdoc/>
         /// <exception cref="InvalidOperationException">Anonymous type does not contain an id for primary key column.</exception>
-        public Task<int> DeleteAsync<T>(CancellationToken cancellationToken, object pocoOrPrimaryKeyValue)
+        public Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            CancellationToken cancellationToken, object pocoOrPrimaryKeyValue)
         {
             if (pocoOrPrimaryKeyValue.GetType() == typeof(T))
                 return DeleteAsync(cancellationToken, pocoOrPrimaryKeyValue);
@@ -2703,14 +2806,16 @@ namespace PetaPoco
         }
 
         /// <inheritdoc/>
-        public Task<int> DeleteAsync<T>(CancellationToken cancellationToken, Sql sql)
+        public Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            CancellationToken cancellationToken, Sql sql)
         {
             var pd = PocoData.ForType(typeof(T), _defaultMapper);
             return ExecuteAsync(cancellationToken, new Sql($"DELETE FROM {_provider.EscapeTableName(pd.TableInfo.TableName)}").Append(sql));
         }
 
         /// <inheritdoc/>
-        public Task<int> DeleteAsync<T>(CancellationToken cancellationToken, string sql, params object[] args)
+        public Task<int> DeleteAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
+            CancellationToken cancellationToken, string sql, params object[] args)
         {
             var pd = PocoData.ForType(typeof(T), _defaultMapper);
             return ExecuteAsync(cancellationToken, $"DELETE FROM {_provider.EscapeTableName(pd.TableInfo.TableName)} {sql}", args);
@@ -2875,15 +2980,15 @@ namespace PetaPoco
             => ExecuteInternal(CommandType.StoredProcedure, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public T ExecuteScalarProc<T>(string storedProcedureName, params object[] args)
+        public T ExecuteScalarProc<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args)
             => ExecuteScalarInternal<T>(CommandType.StoredProcedure, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public IEnumerable<T> QueryProc<T>(string storedProcedureName, params object[] args)
+        public IEnumerable<T> QueryProc<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args)
             => ExecuteReader<T>(CommandType.StoredProcedure, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public List<T> FetchProc<T>(string storedProcedureName, params object[] args)
+        public List<T> FetchProc<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args)
             => QueryProc<T>(storedProcedureName, args).ToList();
 
 #if ASYNC
@@ -2892,19 +2997,19 @@ namespace PetaPoco
             => ExecuteNonQueryProcAsync(CancellationToken.None, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public Task<T> ExecuteScalarProcAsync<T>(string storedProcedureName, params object[] args)
+        public Task<T> ExecuteScalarProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args)
             => ExecuteScalarProcAsync<T>(CancellationToken.None, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public Task<IAsyncReader<T>> QueryProcAsync<T>(string storedProcedureName, params object[] args)
+        public Task<IAsyncReader<T>> QueryProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args)
             => QueryProcAsync<T>(CancellationToken.None, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public Task QueryProcAsync<T>(Action<T> action, string storedProcedureName, params object[] args)
+        public Task QueryProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, string storedProcedureName, params object[] args)
             => QueryProcAsync(action, CancellationToken.None, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public Task<List<T>> FetchProcAsync<T>(string storedProcedureName, params object[] args)
+        public Task<List<T>> FetchProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string storedProcedureName, params object[] args)
             => FetchProcAsync<T>(CancellationToken.None, storedProcedureName, args);
 
         /// <inheritdoc/>
@@ -2912,19 +3017,19 @@ namespace PetaPoco
             => ExecuteInternalAsync(cancellationToken, CommandType.StoredProcedure, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public Task<T> ExecuteScalarProcAsync<T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args)
+        public Task<T> ExecuteScalarProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args)
             => ExecuteScalarInternalAsync<T>(cancellationToken, CommandType.StoredProcedure, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public Task<IAsyncReader<T>> QueryProcAsync<T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args)
+        public Task<IAsyncReader<T>> QueryProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args)
             => ExecuteReaderAsync<T>(cancellationToken, CommandType.StoredProcedure, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public Task QueryProcAsync<T>(Action<T> action, CancellationToken cancellationToken, string storedProcedureName, params object[] args)
+        public Task QueryProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, string storedProcedureName, params object[] args)
             => ExecuteReaderAsync(action, cancellationToken, CommandType.StoredProcedure, storedProcedureName, args);
 
         /// <inheritdoc/>
-        public async Task<List<T>> FetchProcAsync<T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args)
+        public async Task<List<T>> FetchProcAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string storedProcedureName, params object[] args)
         {
             var pocos = new List<T>();
             await ExecuteReaderAsync<T>(p => pocos.Add(p), cancellationToken, CommandType.StoredProcedure, storedProcedureName, args);
@@ -3047,6 +3152,7 @@ namespace PetaPoco
         /// <param name="param">The IDbDataParameter to which the properties will be set.</param>
         /// <param name="value">The value to be assigned to the IDbDataParameter.</param>
         /// <param name="pocoColumn">The PocoColumn instance for the POCO's column-mapped property.</param>
+        [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(DbType))]
         private void SetParameterProperties(IDbDataParameter param, object value, PocoColumn pocoColumn)
         {
             // Assign the parameter value
@@ -3088,15 +3194,15 @@ namespace PetaPoco
                 else if (t == typeof(string))
                 {
                     // out of memory exception occurs if trying to save more than 4000 characters to SQL Server CE NText column. Set before attempting to set Size, or Size will always max out at 4000
-                    if ((value as string).Length + 1 > 4000 && param.GetType().Name == "SqlCeParameter")
+                    if (((string)value).Length + 1 > 4000 && param.GetType().Name == "SqlCeParameter")
                         param.GetType().GetProperty("SqlDbType").SetValue(param, SqlDbType.NText, null);
 
-                    param.Size = Math.Max((value as string).Length + 1, 4000); // Help query plan caching by using common size
+                    param.Size = Math.Max(((string)value).Length + 1, 4000); // Help query plan caching by using common size
                     param.Value = value;
                 }
                 else if (t == typeof(AnsiString))
                 {
-                    var asValue = (value as AnsiString).Value;
+                    var asValue = ((AnsiString)value).Value;
                     if (asValue == null)
                     {
                         param.Size = 0;
@@ -3112,7 +3218,7 @@ namespace PetaPoco
                 }
                 else if (t == typeof(DateTime2))
                 {
-                    var dt2Value = (value as DateTime2)?.Value;
+                    var dt2Value = ((DateTime2)value)?.Value;
                     param.Value = dt2Value ?? (object)DBNull.Value;
                     param.DbType = DbType.DateTime2;
                 }
