@@ -279,6 +279,20 @@ namespace PetaPoco
         /// </returns>
         Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
+        // [DV]
+        /// <summary>
+        /// [DV] Asynchronously executes a query and returns the results as a list of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The POCO type representing a single result record.</typeparam>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+        /// <param name="queryOptions">[DV] Allows overriding of the IDatabase EnableAutoSelect.</param>
+        /// <param name="sql">The SQL query string.</param>
+        /// <param name="args">The parameters to embed in the SQL string.</param>
+        /// <returns>
+        /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
+        /// </returns>
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, QueryOptions queryOptions, string sql, params object[] args);
+
         #endregion
 
         #region FetchAsync : Single-POCO as CommandType
@@ -326,6 +340,22 @@ namespace PetaPoco
         /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
         /// </returns>
         Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, string sql, params object[] args);
+
+        // [DV]
+        /// <summary>
+        /// [DV] Asynchronously executes a query for the specified command type and returns the results as a list of type <typeparamref
+        /// name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The POCO type representing a single result record.</typeparam>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+        /// <param name="commandType">The type of command to execute.</param>
+        /// <param name="queryOptions">[DV] Allows overriding of IDatabase EnableAutoSelect.</param>
+        /// <param name="sql">The SQL query string.</param>
+        /// <param name="args">The parameters to embed in the SQL string.</param>
+        /// <returns>
+        /// A task that represents the asynchronous operation. The task result contains a list of POCOs of type <typeparamref name="T"/>.
+        /// </returns>
+        Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, QueryOptions queryOptions, string sql, params object[] args);
 
         #endregion
 
@@ -640,6 +670,22 @@ namespace PetaPoco
         /// <exception cref="InvalidOperationException">The result set is empty, or the result set contains more than one
         /// record.</exception>
         Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
+
+        /// <summary>
+        /// [DV] Asynchronously returns the only record that matches the specified query, and throws an exception if there is not exactly one
+        /// matching record. This overload allows you to supply QueryOptions.
+        /// </summary>
+        /// <typeparam name="T">The POCO type representing a single result record.</typeparam>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+        /// <param name="queryOptions">Provides options just for this call, overriding, for example, EnableAutoSelect.</param>
+        /// <param name="sql">The SQL query string.</param>
+        /// <param name="args">The parameters to embed in the SQL string.</param>
+        /// <returns>
+        /// A task that represents the asynchronous operation. The task result contains the single result returned by the query.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">The result set is empty, or the result set contains more than one
+        /// record.</exception>
+        Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, QueryOptions queryOptions, string sql, params object[] args);
 
         #endregion
 

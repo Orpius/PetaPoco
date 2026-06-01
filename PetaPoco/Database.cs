@@ -987,6 +987,20 @@ namespace PetaPoco
                 sql = AutoSelectHelper.AddSelectClause<T>(_provider, sql, _defaultMapper);
             return ExecuteReaderAsync(action, cancellationToken, commandType, sql, args);
         }
+
+        // [DV]
+        /// <inheritdoc/>
+        public Task QueryAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Action<T> action, CancellationToken cancellationToken, CommandType commandType, QueryOptions queryOptions, string sql, params object[] args)
+        {
+            bool enableAutoSelect = queryOptions.EnableAutoSelect ?? EnableAutoSelect;
+
+            if (enableAutoSelect)
+            {
+                sql = AutoSelectHelper.AddSelectClause<T>(_provider, sql, _defaultMapper);
+            }
+
+            return ExecuteReaderAsync(action, cancellationToken, commandType, sql, args);
+        }
 #endif
 
         /// <param name="commandType">The type of command to execute.</param>
@@ -1401,6 +1415,11 @@ namespace PetaPoco
         public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
             => FetchAsync<T>(CancellationToken.None, CommandType.Text, sql, args);
 
+        // [DV]
+        /// <inheritdoc/>
+        public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, QueryOptions queryOptions, string sql, params object[] args)
+            => FetchAsync<T>(CancellationToken.None, CommandType.Text, queryOptions, sql, args);
+
         /// <inheritdoc/>
         public Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CommandType commandType)
             => FetchAsync<T>(CancellationToken.None, CommandType.Text, string.Empty);
@@ -1426,6 +1445,15 @@ namespace PetaPoco
         {
             var pocos = new List<T>();
             await QueryAsync<T>(p => pocos.Add(p), cancellationToken, commandType, sql, args).ConfigureAwait(false);
+            return pocos;
+        }
+
+        // [DV]
+        /// <inheritdoc/>
+        public async Task<List<T>> FetchAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, CommandType commandType, QueryOptions queryOptions, string sql, params object[] args)
+        {
+            var pocos = new List<T>();
+            await QueryAsync<T>(p => pocos.Add(p), cancellationToken, commandType, queryOptions, sql, args).ConfigureAwait(false);
             return pocos;
         }
 #endif
@@ -1891,6 +1919,12 @@ namespace PetaPoco
         /// <inheritdoc/>
         public async Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
             => (await FetchAsync<T>(cancellationToken, sql, args).ConfigureAwait(false)).Single();
+
+        // [DV]
+        /// <inheritdoc/>
+        public async Task<T> SingleAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, QueryOptions queryOptions, string sql, params object[] args)
+        => (await FetchAsync<T>(cancellationToken, queryOptions, sql, args).ConfigureAwait(false)).Single();
+
 #endif
 
         #endregion
