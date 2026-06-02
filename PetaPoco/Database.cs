@@ -2039,6 +2039,11 @@ namespace PetaPoco
         /// <inheritdoc/>
         public async Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args)
             => (await FetchAsync<T>(cancellationToken, sql, args).ConfigureAwait(false)).FirstOrDefault();
+
+        // [DV]
+        /// <inheritdoc/>
+        public async Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken,QueryOptions queryOptions, string sql, params object[] args)
+            => (await FetchAsync<T>(cancellationToken, queryOptions, sql, args).ConfigureAwait(false)).FirstOrDefault();
 #endif
 
         #endregion

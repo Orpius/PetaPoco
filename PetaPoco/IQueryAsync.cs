@@ -790,6 +790,21 @@ namespace PetaPoco
         /// </returns>
         Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, string sql, params object[] args);
 
+        // [DV]
+        /// <summary>
+        /// [DV] Asynchronously returns the first result returned by the specified query, or a default value if the result set is empty.
+        /// </summary>
+        /// <typeparam name="T">The POCO type representing a single result record.</typeparam>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+        /// <param name="queryOptions">Options to configure the query execution.</param>
+        /// <param name="sql">The SQL query string.</param>
+        /// <param name="args">The parameters to embed in the SQL string.</param>
+        /// <returns>
+        /// A task that represents the asynchronous operation. The task result contains default(T) if the result set is empty; otherwise,
+        /// the first result returned by the specified query.
+        /// </returns>
+        Task<T> FirstOrDefaultAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(CancellationToken cancellationToken, QueryOptions queryOptions, string sql, params object[] args);
+
         #endregion
     }
 #endif
